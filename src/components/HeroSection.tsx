@@ -1,12 +1,144 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { MapPin, Award, Calendar, Code2 } from 'lucide-react';
+import * as THREE from 'three';
+
+// Colorful Particle Field component
+const ParticleField = ({ containerRef, isMobile }) => {
+  useEffect(() => {
+    if (!containerRef.current) return;
+    
+    // Three.js setup
+    const container = containerRef.current;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      75, 
+      window.innerWidth / window.innerHeight, 
+      0.1, 
+      1000
+    );
+    
+    const renderer = new THREE.WebGLRenderer({ 
+      alpha: true,
+      antialias: true
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x0f172a, 1);
+    
+    // Clear any existing canvas
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+    
+    container.appendChild(renderer.domElement);
+    
+    // Create particles
+    const particleCount = 5000;
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+    
+    // Color palette: blue -> violet -> purple -> maroon red
+    const colorPalette = [
+      new THREE.Color(0x1e3a8a),  // deep blue
+      new THREE.Color(0x3b82f6),  // blue
+      new THREE.Color(0x6366f1),  // indigo
+      new THREE.Color(0x7c3aed),  // violet
+      new THREE.Color(0x8b5cf6),  // purple
+      new THREE.Color(0xa855f7),  // light purple
+      new THREE.Color(0xd946ef),  // pinkish purple
+      new THREE.Color(0xec4899),  // pink
+      new THREE.Color(0xf43f5e),  // red
+      new THREE.Color(0x9f1239)   // maroon
+    ];
+    
+    for (let i = 0; i < particleCount; i++) {
+      const i3 = i * 3;
+      // Random positions in a cube
+      positions[i3] = (Math.random() - 0.5) * 10;
+      positions[i3 + 1] = (Math.random() - 0.5) * 10;
+      positions[i3 + 2] = (Math.random() - 0.5) * 10;
+      
+      // Assign random color from our palette
+      const randomColor = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+      colors[i3] = randomColor.r;
+      colors[i3 + 1] = randomColor.g;
+      colors[i3 + 2] = randomColor.b;
+    }
+    
+    const particlesGeometry = new THREE.BufferGeometry();
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    
+    const particlesMaterial = new THREE.PointsMaterial({
+      size: 0.03,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.9,
+      sizeAttenuation: true,
+      blending: THREE.AdditiveBlending
+    });
+    
+    const points = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(points);
+    
+    // Position camera
+    camera.position.z = 3;
+    
+    // Handle window resize
+    const handleResize = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
+    // Animation loop
+    const clock = new THREE.Clock();
+    
+    const animate = () => {
+      const time = clock.getElapsedTime();
+      
+      // Rotate particles slowly
+      points.rotation.y = time * 0.05;
+      points.rotation.x = time * 0.02;
+      
+      // Pulsing effect for particles
+      const pulseFactor = Math.sin(time * 0.5) * 0.1 + 1;
+      particlesMaterial.size = 0.03 * pulseFactor;
+      
+      renderer.render(scene, camera);
+      const animationId = requestAnimationFrame(animate);
+      return animationId;
+    };
+    
+    const animationId = animate();
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationId);
+      renderer.dispose();
+      particlesGeometry.dispose();
+      particlesMaterial.dispose();
+      
+      if (container && renderer.domElement) {
+        container.removeChild(renderer.domElement);
+      }
+    };
+  }, [containerRef, isMobile]);
+  
+  return null;
+};
 
 const HeroSection = () => {
   const vantaRef = useRef(null);
-  const canvasRef = useRef(null);
+  const threeContainerRef = useRef(null);
   const [vantaEffect, setVantaEffect] = useState(null);
-  const isMobile = window.innerWidth < 768;
+  const [isMobile, setIsMobile] = useState(false);
 
   const [props, api] = useSpring(() => ({
     from: { opacity: 0, transform: 'translateY(50px)' },
@@ -19,6 +151,21 @@ const HeroSection = () => {
     config: { duration: 500 },
   }));
 
+  // Check if mobile on mount
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
+  // Setup Vanta.js for desktop
   useEffect(() => {
     if (!vantaEffect && typeof window !== 'undefined' && window.VANTA && !isMobile) {
       const effect = window.VANTA.GLOBE({
@@ -30,10 +177,10 @@ const HeroSection = () => {
         minWidth: 200.00,
         scale: 1.00,
         scaleMobile: 1.00,
-        color: 0xffffff,
+        color: 0xffffff, 
         color2: 0xff3f81,
         size: 0.8,
-        backgroundColor: 0x0f172a
+        backgroundColor:0x30321
       });
       
       setVantaEffect(effect);
@@ -43,71 +190,6 @@ const HeroSection = () => {
       if (vantaEffect) vantaEffect.destroy();
     };
   }, [vantaEffect, isMobile]);
-
-  useEffect(() => {
-    if (!isMobile) return;
-
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    const particles = [];
-    
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    class Particle {
-      constructor() {
-        this.reset();
-      }
-
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2;
-        this.speedX = (Math.random() - 0.5) * 0.5;
-        this.speedY = (Math.random() - 0.5) * 0.5;
-        this.opacity = Math.random() * 0.5 + 0.2;
-      }
-
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        if (this.x < 0 || this.x > canvas.width) this.reset();
-        if (this.y < 0 || this.y > canvas.height) this.reset();
-      }
-
-      draw() {
-        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    for (let i = 0; i < 50; i++) {
-      particles.push(new Particle());
-    }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(particle => {
-        particle.update();
-        particle.draw();
-      });
-      requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
-    };
-  }, [isMobile]);
 
   useEffect(() => {
     const blinkInterval = setInterval(() => {
@@ -124,9 +206,12 @@ const HeroSection = () => {
       {/* Desktop background effect */}
       <div ref={vantaRef} className="absolute inset-0 z-0 hidden md:block"></div>
       
-      {/* Mobile background with particles */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 md:hidden">
-        <canvas ref={canvasRef} className="absolute inset-0" />
+      {/* Mobile background with Three.js particles */}
+      <div 
+        ref={threeContainerRef} 
+        className="absolute inset-0 z-0 block md:hidden"
+      >
+        {isMobile && <ParticleField containerRef={threeContainerRef} isMobile={isMobile} />}
       </div>
       
       <div className="container mx-auto px-4 z-10 relative">
