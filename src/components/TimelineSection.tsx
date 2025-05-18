@@ -47,13 +47,13 @@ const TimelineSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 bg-slate-900">
+    <section className="py-24 bg-gradient-to-b from-slate-900 via-fuchsia-950 to-slate-900">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-            Event <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-600 bg-clip-text text-transparent">Timeline</span>
+            Event <span className="bg-gradient-to-r from-fuchsia-500 via-purple-500 to-pink-600 bg-clip-text text-transparent">Timeline</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-6"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-pink-500 mx-auto mb-6"></div>
           <p className="max-w-3xl mx-auto text-gray-300 text-lg">
             The DecodeX hackathon spans three days of intensive activities, including an industrial visit and a 24-hour coding challenge.
           </p>
@@ -61,21 +61,38 @@ const TimelineSection: React.FC = () => {
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-1/2 -ml-px w-0.5 h-full bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-600 hidden md:block"></div>
+          <div className="absolute left-1/2 -ml-px w-0.5 h-full bg-gradient-to-b from-fuchsia-500 via-purple-500 to-pink-500 hidden md:block"></div>
 
           <div className="space-y-12">
             {timelineEvents.map((event, index) => (
               <div key={index} className="relative">
                 {/* Timeline dot */}
-                <div className="hidden md:block absolute left-1/2 -ml-3 mt-10 w-6 h-6 rounded-full border-4 border-indigo-500 bg-slate-900 z-10"></div>
+                <div className={`hidden md:block absolute left-1/2 -ml-3 mt-10 w-6 h-6 rounded-full border-4 ${
+                  index === 0 ? 'border-fuchsia-500 shadow-fuchsia-500/50' :
+                  index === 1 ? 'border-purple-500 shadow-purple-500/50' :
+                  index === 2 ? 'border-pink-500 shadow-pink-500/50' :
+                  'border-violet-500 shadow-violet-500/50'
+                } bg-slate-900 z-10 shadow-lg`}></div>
 
                 <div className={`md:flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                   {/* Date section */}
                   <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
-                    <div className="p-6 bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 shadow-xl mb-6 md:mb-0">
-                      <div className="flex items-center justify-center md:justify-start mb-4 text-indigo-400">
-                        {event.icon}
-                        <span className="ml-2 text-lg font-semibold">{event.date}</span>
+                    <div className={`p-6 bg-gradient-to-br ${
+                      index === 0 ? 'from-slate-800/80 to-fuchsia-950/20 border-fuchsia-700/30' :
+                      index === 1 ? 'from-slate-800/80 to-purple-950/20 border-purple-700/30' :
+                      index === 2 ? 'from-slate-800/80 to-pink-950/20 border-pink-700/30' :
+                      'from-slate-800/80 to-violet-950/20 border-violet-700/30'
+                    } backdrop-blur-sm rounded-2xl border shadow-xl mb-6 md:mb-0 transform transition-all hover:scale-[1.02] group`}>
+                      <div className="flex items-center justify-center md:justify-start mb-4">
+                        <div className={`${
+                          index === 0 ? 'text-fuchsia-400' :
+                          index === 1 ? 'text-purple-400' :
+                          index === 2 ? 'text-pink-400' :
+                          'text-violet-400'
+                        } flex items-center`}>
+                          {event.icon}
+                          <span className="ml-2 text-lg font-semibold">{event.date}</span>
+                        </div>
                       </div>
                       <h3 className="text-xl font-bold mb-2 text-white">{event.title}</h3>
                       <p className="text-gray-300 mb-2">{event.description}</p>
