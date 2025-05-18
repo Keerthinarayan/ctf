@@ -26,21 +26,21 @@ const AboutSection: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-32 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 section-transition">
+    <section id="about" className="py-32 bg-gradient-to-b from-slate-900 via-purple-950 to-slate-900 section-transition">
       <div className="container mx-auto px-4">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-            About The <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-600 bg-clip-text text-transparent">Event</span>
+            About The <span className="bg-gradient-to-r from-fuchsia-500 via-purple-500 to-pink-600 bg-clip-text text-transparent">Event</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-8"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-pink-500 mx-auto mb-8"></div>
           <p className="max-w-3xl mx-auto text-gray-300 text-xl">
             DecodeX is the premier 24-hour hackathon organized by IEEE SPS, bringing together the brightest minds to solve complex problems and innovate.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-          <div className="bg-gradient-to-br from-slate-800/80 to-slate-800/20 backdrop-blur-sm rounded-2xl p-10 border border-slate-700/50 shadow-xl transform transition-all hover:scale-[1.02] group">
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/5 to-purple-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div className="bg-gradient-to-br from-slate-800/80 to-purple-950/20 backdrop-blur-sm rounded-2xl p-10 border border-purple-700/30 shadow-xl transform transition-all hover:scale-[1.02] group">
+            <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-600/5 to-purple-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <h3 className="text-2xl font-bold mb-6 text-white">What is DecodeX?</h3>
             <p className="text-gray-300 mb-6 text-lg">
               DecodeX is IEEE SPS's flagship 24-hour hackathon where participants decode, develop, and innovate. It's a platform for tech enthusiasts to showcase their problem-solving abilities, coding skills, and innovative thinking.
@@ -50,7 +50,7 @@ const AboutSection: React.FC = () => {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-slate-800/80 to-slate-800/20 backdrop-blur-sm rounded-2xl p-10 border border-slate-700/50 shadow-xl transform transition-all hover:scale-[1.02] group">
+          <div className="bg-gradient-to-br from-slate-800/80 to-fuchsia-950/20 backdrop-blur-sm rounded-2xl p-10 border border-fuchsia-700/30 shadow-xl transform transition-all hover:scale-[1.02] group">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-600/5 to-pink-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <h3 className="text-2xl font-bold mb-6 text-white">Why Participate?</h3>
             <p className="text-gray-300 mb-6 text-lg">
@@ -66,9 +66,19 @@ const AboutSection: React.FC = () => {
           {features.map((feature, index) => (
             <div 
               key={index}
-              className="bg-gradient-to-br from-slate-800/80 to-slate-800/20 rounded-xl p-8 border border-slate-700/30 flex flex-col items-center text-center group hover:scale-[1.02] transition-all duration-300"
+              className={`bg-gradient-to-br from-slate-800/80 ${
+                index === 0 ? 'to-fuchsia-950/20 border-fuchsia-700/30' :
+                index === 1 ? 'to-purple-950/20 border-purple-700/30' :
+                index === 2 ? 'to-pink-950/20 border-pink-700/30' :
+                'to-violet-950/20 border-violet-700/30'
+              } rounded-xl p-8 border shadow-xl flex flex-col items-center text-center group hover:scale-[1.02] transition-all duration-300`}
             >
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-indigo-600/20 to-purple-600/20 flex items-center justify-center mb-6 text-indigo-400 group-hover:text-indigo-300 transition-colors">
+              <div className={`w-16 h-16 rounded-full ${
+                index === 0 ? 'bg-gradient-to-r from-fuchsia-600/20 to-purple-600/20 text-fuchsia-400' :
+                index === 1 ? 'bg-gradient-to-r from-purple-600/20 to-pink-600/20 text-purple-400' :
+                index === 2 ? 'bg-gradient-to-r from-pink-600/20 to-violet-600/20 text-pink-400' :
+                'bg-gradient-to-r from-violet-600/20 to-fuchsia-600/20 text-violet-400'
+              } flex items-center justify-center mb-6 group-hover:text-white transition-colors`}>
                 {feature.icon}
               </div>
               <h3 className="text-xl font-semibold mb-4 text-white">{feature.title}</h3>
