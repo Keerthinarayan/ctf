@@ -6,8 +6,29 @@
   color-scheme: dark;
 }
 
-* {
-  cursor: none;
+/* Only apply custom cursor on desktop */
+@media (min-width: 768px) {
+  * {
+    cursor: none;
+  }
+  
+  .custom-cursor {
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: theme('colors.indigo.500');
+    transition: transform 350ms ease;
+    transform: translate(-50%, -50%) scale(.3);
+    z-index: 1000;
+  }
+
+  .custom-cursor--link {
+    transform: translate(-50%, -50%) scale(1.25);
+  }
 }
 
 body {
@@ -17,24 +38,6 @@ body {
 
 html {
   scroll-behavior: smooth;
-}
-
-.custom-cursor {
-  position: fixed;
-  opacity: 0;
-  pointer-events: none;
-  mix-blend-mode: difference;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: theme('colors.indigo.500');
-  transition: transform 350ms ease;
-  transform: translate(-50%, -50%) scale(.3);
-  z-index: 1000;
-}
-
-.custom-cursor--link {
-  transform: translate(-50%, -50%) scale(1.25);
 }
 
 @keyframes textGradient {
