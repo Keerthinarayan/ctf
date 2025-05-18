@@ -3,12 +3,12 @@ import { animated, useSpring } from '@react-spring/web';
 import { MapPin, Award, Calendar, Code2 } from 'lucide-react';
 import * as THREE from 'three';
 
-// Colorful Particle Field component
+
 const ParticleField = ({ containerRef, isMobile }) => {
   useEffect(() => {
     if (!containerRef.current) return;
     
-    // Three.js setup
+    
     const container = containerRef.current;
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -25,19 +25,19 @@ const ParticleField = ({ containerRef, isMobile }) => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x0f172a, 1);
     
-    // Clear any existing canvas
+    
     while (container.firstChild) {
       container.removeChild(container.firstChild);
     }
     
     container.appendChild(renderer.domElement);
     
-    // Create particles
+    
     const particleCount = 5000;
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
     
-    // Color palette: blue -> violet -> purple -> maroon red
+    
     const colorPalette = [
       new THREE.Color(0x1e3a8a),  // deep blue
       new THREE.Color(0x3b82f6),  // blue
@@ -165,7 +165,7 @@ const HeroSection = () => {
     };
   }, []);
 
-  // Setup Vanta.js for desktop
+  
   useEffect(() => {
     if (!vantaEffect && typeof window !== 'undefined' && window.VANTA && !isMobile) {
       const effect = window.VANTA.GLOBE({
@@ -175,11 +175,11 @@ const HeroSection = () => {
         gyroControls: false,
         minHeight: 200.00,
         minWidth: 200.00,
-        scale: 1.00,
+        scale: 0.5,
         scaleMobile: 1.00,
         color: 0xffffff, 
         color2: 0xff3f81,
-        size: 0.8,
+        size: 0.80,
         backgroundColor:0x30321
       });
       
