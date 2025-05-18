@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Code2 } from 'lucide-react';
+import { useSpring, animated } from '@react-spring/web';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,6 +9,17 @@ const Header: React.FC = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const location = useLocation();
   const [showCodeBracket, setShowCodeBracket] = useState(true);
+
+  const menuAnimation = useSpring({
+    transform: isOpen ? 'translateX(0%)' : 'translateX(-100%)',
+    opacity: isOpen ? 1 : 0,
+    config: { tension: 280, friction: 60 },
+  });
+
+  const backdropAnimation = useSpring({
+    opacity: isOpen ? 0.5 : 0,
+    config: { tension: 280, friction: 60 },
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +44,11 @@ const Header: React.FC = () => {
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+    if (!isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
   };
 
   return (
@@ -61,6 +78,7 @@ const Header: React.FC = () => {
             </Link>
           </div>
 
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {[
               { name: 'Home', path: '/' },
@@ -86,17 +104,38 @@ const Header: React.FC = () => {
             </a>
           </nav>
 
+          {/* Mobile Menu Button */}
           <button
-            className="block md:hidden text-gray-200 focus:outline-none"
+            className="block md:hidden text-gray-200 focus:outline-none z-50"
             onClick={toggleMenu}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
+        {/* Mobile Menu Backdrop */}
         {isOpen && (
-          <div className="md:hidden">
-            <div className="flex flex-col space-y-4 py-4 text-center">
+          <animated.div
+            style={backdropAnimation}
+            className="fixed inset-0 bg-black z-40"
+            onClick={toggleMenu}
+          />
+        )}
+
+        {/* Mobile Menu */}
+        <animated.div
+          style={menuAnimation}
+          className="fixed top-0 left-0 h-full w-3/4 bg-slate-900 shadow-lg z-40 md:hidden"
+        >
+          <div className="flex flex-col p-6">
+            <div className="flex items-center mb-8">
+              <Code2 className="h-6 w-6 text-indigo-400 mr-2" />
+              <span className="text-xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-600 bg-clip-text text-transparent">
+                DecodeX
+              </span>
+            </div>
+            
+            <div className="flex flex-col space-y-4">
               {[
                 { name: 'Home', path: '/' },
                 { name: 'Timeline', path: '/timeline' },
@@ -104,26 +143,26 @@ const Header: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`text-sm font-medium py-2 transition-colors hover:text-indigo-400 ${
+                  className={`text-lg font-medium py-2 px-4 rounded-lg transition-all duration-300 ${
                     location.pathname === item.path
-                      ? 'text-indigo-400'
-                      : 'text-gray-200'
+                      ? 'bg-indigo-500/10 text-indigo-400'
+                      : 'text-gray-200 hover:bg-indigo-500/10'
                   }`}
-                  onClick={() => setIsOpen(false)}
+                  onClick={toggleMenu}
                 >
                   {item.name}
                 </Link>
               ))}
               <a
                 href="#register"
-                className="px-4 py-1.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm rounded-full hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md mx-auto w-max"
-                onClick={() => setIsOpen(false)}
+                className="mt-4 px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-lg rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md text-center font-medium"
+                onClick={toggleMenu}
               >
-                Register
+                Register Now
               </a>
             </div>
           </div>
-        )}
+        </animated.div>
       </div>
     </header>
   );
