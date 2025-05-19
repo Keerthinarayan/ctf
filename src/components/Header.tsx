@@ -60,64 +60,57 @@ const Header: React.FC = () => {
       }`}
     >
       <div 
-        className="h-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-600 absolute bottom-0 left-0 transition-all duration-300"
+        className="h-0.5 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-pink-500 absolute bottom-0 left-0 transition-all duration-300"
         style={{ width: `${scrollProgress}%` }}
       ></div>
       
       <div className="container mx-auto px-4">
-        <nav className="flex justify-between items-center">
-          <Link 
-            to="/" 
-            className="flex items-center space-x-2 text-white group"
-          >
-            <div className="flex items-center">
-              <span className={`text-2xl transition-opacity duration-500 ${showCodeBracket ? 'opacity-100' : 'opacity-30'}`}>&lt;/&gt;</span>
-              <span className="text-xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-600 bg-clip-text text-transparent ml-2">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center">
+            <Link 
+              to="/" 
+              className="flex items-center space-x-2 text-white group"
+            >
+              <span className={`text-white transition-opacity duration-500 ${showCodeBracket ? 'opacity-100' : 'opacity-30'}`}>&lt;/&gt;</span>
+              <span className="text-lg font-bold bg-gradient-to-r from-fuchsia-500 via-purple-500 to-pink-600 bg-clip-text text-transparent ml-2">
                 DecodeX
               </span>
-            </div>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {[
-              { name: 'Home', path: '/' },
-              { name: 'Timeline', path: '/timeline' },
-            ].map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`text-sm font-medium transition-all duration-300 hover:text-indigo-400 ${
-                  location.pathname === item.path
-                    ? 'text-indigo-400'
-                    : 'text-gray-200'
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <Link
-              to="/register"
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                location.pathname === '/register'
-                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/25'
-                  : 'bg-indigo-500/10 text-indigo-400 hover:bg-indigo-600 hover:text-white'
-              }`}
-            >
-              Register
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          <nav className="hidden md:flex space-x-8 items-center">
+            <Link
+              to="/"
+              className={`text-sm font-medium transition-all duration-300 hover:text-purple-400 hover:scale-105 ${
+                location.pathname === '/' ? 'text-purple-400' : 'text-gray-200'
+              }`}
+            >
+              Home
+            </Link>
+            <Link
+              to="/timeline"
+              className={`text-sm font-medium transition-all duration-300 hover:text-purple-400 hover:scale-105 ${
+                location.pathname === '/timeline' ? 'text-purple-400' : 'text-gray-200'
+              }`}
+            >
+              Timeline
+            </Link>
+            <Link
+              to="/register"
+              className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-medium transform hover:from-indigo-700 hover:to-purple-700 hover:scale-105 transition-all"
+            >
+              Register
+            </Link>
+          </nav>
+
           <button
             className="block md:hidden text-gray-200 focus:outline-none z-50"
             onClick={toggleMenu}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
-        </nav>
+        </div>
 
-        {/* Mobile Menu Backdrop */}
         {isOpen && (
           <animated.div
             style={backdropAnimation}
@@ -126,38 +119,48 @@ const Header: React.FC = () => {
           />
         )}
 
-        {/* Mobile Menu */}
         <animated.div
           style={menuAnimation}
           className="fixed top-0 left-0 h-full w-3/4 bg-slate-900 shadow-lg z-40 md:hidden"
         >
           <div className="flex flex-col p-6">
             <div className="flex items-center mb-8">
-              <Code2 className="h-6 w-6 text-indigo-400 mr-2" />
-              <span className="text-xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-600 bg-clip-text text-transparent">
+              <Code2 className="h-6 w-6 text-purple-400 mr-2" />
+              <span className="text-xl font-bold bg-gradient-to-r from-fuchsia-500 to-purple-500 bg-clip-text text-transparent">
                 DecodeX
               </span>
             </div>
             
             <div className="flex flex-col space-y-4">
-              {[
-                { name: 'Home', path: '/' },
-                { name: 'Timeline', path: '/timeline' },
-                { name: 'Register', path: '/register' },
-              ].map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  className={`text-lg font-medium py-2 px-4 rounded-lg transition-all duration-300 ${
-                    location.pathname === item.path
-                      ? 'bg-indigo-500/10 text-indigo-400'
-                      : 'text-gray-200 hover:bg-indigo-500/10'
-                  }`}
-                  onClick={toggleMenu}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              <Link
+                to="/"
+                className={`text-lg font-medium py-2 px-4 rounded-lg transition-all duration-300 ${
+                  location.pathname === '/'
+                    ? 'bg-purple-500/10 text-purple-400'
+                    : 'text-gray-200 hover:bg-purple-500/10'
+                }`}
+                onClick={toggleMenu}
+              >
+                Home
+              </Link>
+              <Link
+                to="/timeline"
+                className={`text-lg font-medium py-2 px-4 rounded-lg transition-all duration-300 ${
+                  location.pathname === '/timeline'
+                    ? 'bg-purple-500/10 text-purple-400'
+                    : 'text-gray-200 hover:bg-purple-500/10'
+                }`}
+                onClick={toggleMenu}
+              >
+                Timeline
+              </Link>
+              <Link
+                to="/register"
+                className="text-lg font-medium py-2 px-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg text-center hover:from-indigo-700 hover:to-purple-700 transition-all"
+                onClick={toggleMenu}
+              >
+                Register
+              </Link>
             </div>
           </div>
         </animated.div>
