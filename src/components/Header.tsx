@@ -83,6 +83,7 @@ const Header: React.FC = () => {
             {[
               { name: 'Home', path: '/' },
               { name: 'Timeline', path: '/timeline' },
+              { name: 'Register', path: '/register' },
             ].map((item) => (
               <Link
                 key={item.name}
@@ -96,12 +97,6 @@ const Header: React.FC = () => {
                 {item.name}
               </Link>
             ))}
-            <a
-              href="#register"
-              className="px-4 py-1.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm rounded-full hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 shadow-md hover:shadow-indigo-500/20 hover:scale-105"
-            >
-              Register
-            </a>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -139,6 +134,7 @@ const Header: React.FC = () => {
               {[
                 { name: 'Home', path: '/' },
                 { name: 'Timeline', path: '/timeline' },
+                { name: 'Register', path: '/register' },
               ].map((item) => (
                 <Link
                   key={item.name}
@@ -153,13 +149,6 @@ const Header: React.FC = () => {
                   {item.name}
                 </Link>
               ))}
-              <a
-                href="#register"
-                className="mt-4 px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-lg rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md text-center font-medium"
-                onClick={toggleMenu}
-              >
-                Register Now
-              </a>
             </div>
           </div>
         </animated.div>

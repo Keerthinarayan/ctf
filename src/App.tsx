@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import TimelinePage from './pages/TimelinePage';
+import RegistrationPage from './pages/RegistrationPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/timeline" element={<TimelinePage />} />
+            <Route path="/register" element={<RegistrationPage />} />
           </Routes>
         </main>
         <div className="h-[2px] bg-gradient-to-r from-pink-600 via-purple-500 to-indigo-500 animate-gradient"></div>
@@ -26,4 +28,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
