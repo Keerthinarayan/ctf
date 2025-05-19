@@ -1,13 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { MapPin, Award, Calendar, Code2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import * as THREE from 'three';
-
 
 const ParticleField = ({ containerRef, isMobile }) => {
   useEffect(() => {
     if (!containerRef.current) return;
-    
     
     const container = containerRef.current;
     const scene = new THREE.Scene();
@@ -25,18 +24,15 @@ const ParticleField = ({ containerRef, isMobile }) => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x0f172a, 1);
     
-    
     while (container.firstChild) {
       container.removeChild(container.firstChild);
     }
     
     container.appendChild(renderer.domElement);
     
-    
     const particleCount = 5000;
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
-    
     
     const colorPalette = [
       new THREE.Color(0x1e3a8a),  // deep blue
@@ -53,12 +49,10 @@ const ParticleField = ({ containerRef, isMobile }) => {
     
     for (let i = 0; i < particleCount; i++) {
       const i3 = i * 3;
-      // Random positions in a cube
       positions[i3] = (Math.random() - 0.5) * 10;
       positions[i3 + 1] = (Math.random() - 0.5) * 10;
       positions[i3 + 2] = (Math.random() - 0.5) * 10;
       
-      // Assign random color from our palette
       const randomColor = colorPalette[Math.floor(Math.random() * colorPalette.length)];
       colors[i3] = randomColor.r;
       colors[i3 + 1] = randomColor.g;
@@ -81,10 +75,8 @@ const ParticleField = ({ containerRef, isMobile }) => {
     const points = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(points);
     
-    // Position camera
     camera.position.z = 3;
     
-    // Handle window resize
     const handleResize = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
@@ -96,17 +88,14 @@ const ParticleField = ({ containerRef, isMobile }) => {
     
     window.addEventListener('resize', handleResize);
     
-    // Animation loop
     const clock = new THREE.Clock();
     
     const animate = () => {
       const time = clock.getElapsedTime();
       
-      // Rotate particles slowly
       points.rotation.y = time * 0.05;
       points.rotation.x = time * 0.02;
       
-      // Pulsing effect for particles
       const pulseFactor = Math.sin(time * 0.5) * 0.1 + 1;
       particlesMaterial.size = 0.03 * pulseFactor;
       
@@ -117,7 +106,6 @@ const ParticleField = ({ containerRef, isMobile }) => {
     
     const animationId = animate();
     
-    // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationId);
@@ -151,7 +139,6 @@ const HeroSection = () => {
     config: { duration: 500 },
   }));
 
-  // Check if mobile on mount
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
@@ -165,7 +152,6 @@ const HeroSection = () => {
     };
   }, []);
 
-  
   useEffect(() => {
     if (!vantaEffect && typeof window !== 'undefined' && window.VANTA && !isMobile) {
       const effect = window.VANTA.GLOBE({
@@ -203,10 +189,8 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900">
-      {/* Desktop background effect */}
       <div ref={vantaRef} className="absolute inset-0 z-0 hidden md:block"></div>
       
-      {/* Mobile background with Three.js particles */}
       <div 
         ref={threeContainerRef} 
         className="absolute inset-0 z-0 block md:hidden"
@@ -254,12 +238,12 @@ const HeroSection = () => {
             style={props}
             className="flex flex-col gap-4 md:flex-row md:gap-6 mt-4 w-full md:w-auto px-4 md:px-0"
           >
-            <a
-              href="#register"
+            <Link
+              to="/register"
               className="w-full md:w-auto px-6 md:px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-indigo-500/30 text-base md:text-lg font-medium transform hover:scale-105 text-center"
             >
               Register Now
-            </a>
+            </Link>
             <a
               href="#about"
               className="w-full md:w-auto px-6 md:px-8 py-3 bg-white/5 backdrop-blur-lg text-white rounded-full hover:bg-white/10 transition-all border border-white/10 hover:border-white/20 text-base md:text-lg font-medium transform hover:scale-105 text-center"
