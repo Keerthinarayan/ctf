@@ -333,12 +333,12 @@ const RegistrationSection: React.FC = () => {
 
             {/* Team Members Section */}
             <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 shadow-xl">
-              <h3 className="text-xl font-semibold mb-6 text-white">Team Members (Max 3 Additional Members)</h3>
+              <h3 className="text-xl font-semibold mb-6 text-white">Team Members (4 members) </h3>
               
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Number of Additional Members (Maximum 3)
+                    Number of  Members (Captain + Maximum of 3 members )
                   </label>
                   <input
                     type="number"
