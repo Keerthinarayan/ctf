@@ -65,30 +65,29 @@ const Header: React.FC = () => {
       ></div>
       
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center">
-            <Link 
-              to="/" 
-              className="flex items-center space-x-2 text-white group"
-            >
-              <span className={`text-white transition-opacity duration-500 ${showCodeBracket ? 'opacity-100' : 'opacity-30'}`}>&lt;/&gt;</span>
-              <span className="text-lg font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-600 bg-clip-text text-transparent ml-2">
+        <nav className="flex justify-between items-center">
+          <Link 
+            to="/" 
+            className="flex items-center space-x-2 text-white group"
+          >
+            <div className="flex items-center">
+              <span className={`text-2xl transition-opacity duration-500 ${showCodeBracket ? 'opacity-100' : 'opacity-30'}`}>&lt;/&gt;</span>
+              <span className="text-xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-600 bg-clip-text text-transparent ml-2">
                 DecodeX
               </span>
-            </Link>
-          </div>
+            </div>
+          </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {[
               { name: 'Home', path: '/' },
               { name: 'Timeline', path: '/timeline' },
-              { name: 'Register', path: '/register' },
             ].map((item) => (
               <Link
                 key={item.name}
                 to={item.path}
-                className={`text-sm font-medium transition-all duration-300 hover:text-indigo-400 hover:scale-105 ${
+                className={`text-sm font-medium transition-all duration-300 hover:text-indigo-400 ${
                   location.pathname === item.path
                     ? 'text-indigo-400'
                     : 'text-gray-200'
@@ -97,7 +96,17 @@ const Header: React.FC = () => {
                 {item.name}
               </Link>
             ))}
-          </nav>
+            <Link
+              to="/register"
+              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                location.pathname === '/register'
+                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/25'
+                  : 'bg-indigo-500/10 text-indigo-400 hover:bg-indigo-600 hover:text-white'
+              }`}
+            >
+              Register
+            </Link>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -106,7 +115,7 @@ const Header: React.FC = () => {
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
-        </div>
+        </nav>
 
         {/* Mobile Menu Backdrop */}
         {isOpen && (
