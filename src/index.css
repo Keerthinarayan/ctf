@@ -6,7 +6,7 @@
   color-scheme: dark;
 }
 
-/* Only apply custom cursor on desktop */
+/* Custom cursor for desktop */
 @media (min-width: 768px) {
   * {
     cursor: none;
@@ -20,7 +20,7 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: theme('colors.indigo.500');
+    background-color: #004B87; /* ieee.blue.DEFAULT */
     transition: transform 350ms ease;
     transform: translate(-50%, -50%) scale(.3);
     z-index: 1000;
@@ -40,6 +40,7 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Text gradient animation */
 @keyframes textGradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -51,10 +52,12 @@ html {
   animation: textGradient 5s ease infinite;
 }
 
+/* Canvas styling */
 canvas {
   touch-action: none;
 }
 
+/* Section transitions */
 .section-transition {
   position: relative;
   overflow: hidden;
@@ -67,7 +70,7 @@ canvas {
   left: 0;
   right: 0;
   height: 100px;
-  background: linear-gradient(to bottom, transparent, theme('colors.slate.900'));
+  background: linear-gradient(to bottom, transparent, #0f172a); /* slate.900 */
   z-index: 1;
 }
 
@@ -78,6 +81,6 @@ canvas {
   left: 0;
   right: 0;
   height: 100px;
-  background: linear-gradient(to top, transparent, theme('colors.slate.900'));
+  background: linear-gradient(to top, transparent, #0f172a); /* slate.900 */
   z-index: 1;
 }
