@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import TimelinePage from './pages/TimelinePage';
+import CTFPage from './pages/CTFPage';
 import RegistrationPage from './pages/RegistrationPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -14,20 +14,20 @@ function App() {
       <div className="flex flex-col min-h-screen bg-gradient-to-br from-slate-900 to-slate-800">
         <CustomCursor />
         <Header />
-        <div className="h-[2px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-600 animate-gradient"></div>
+        <div className="h-[2px] bg-gradient-to-r from-[#004B87] to-[#78BE20] animate-gradient"></div>
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/timeline" element={<TimelinePage />} />
+            <Route path="/ctf" element={<CTFPage />} />
             <Route path="/register" element={<RegistrationPage />} />
             <Route path="/aboutevent" element={<AboutEventPage />} />
           </Routes>
         </main>
-        <div className="h-[2px] bg-gradient-to-r from-pink-600 via-purple-500 to-indigo-500 animate-gradient"></div>
+        <div className="h-[2px] bg-gradient-to-r from-[#78BE20] to-[#004B87] animate-gradient"></div>
         <Footer />
       </div>
     </Router>
   );
 }
 
-export default App
+export default App;
