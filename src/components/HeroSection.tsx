@@ -35,16 +35,10 @@ const ParticleField = ({ containerRef, isMobile }) => {
     const colors = new Float32Array(particleCount * 3);
     
     const colorPalette = [
-      new THREE.Color(0x1e3a8a),  // deep blue
-      new THREE.Color(0x3b82f6),  // blue
-      new THREE.Color(0x6366f1),  // indigo
-      new THREE.Color(0x7c3aed),  // violet
-      new THREE.Color(0x8b5cf6),  // purple
-      new THREE.Color(0xa855f7),  // light purple
-      new THREE.Color(0xd946ef),  // pinkish purple
-      new THREE.Color(0xec4899),  // pink
-      new THREE.Color(0xf43f5e),  // red
-      new THREE.Color(0x9f1239)   // maroon
+      new THREE.Color(0x00629B),  // IEEE Blue
+      new THREE.Color(0x78BE20),  // IEEE Green
+      new THREE.Color(0x003a69),  // Darker IEEE Blue
+      new THREE.Color(0x62991a),  // Darker IEEE Green
     ];
     
     for (let i = 0; i < particleCount; i++) {
@@ -163,10 +157,10 @@ const HeroSection = () => {
         minWidth: 200.00,
         scale: 0.5,
         scaleMobile: 1.00,
-        color: 0xffffff, 
-        color2: 0xff3f81,
+        color: 0x00629B,
+        color2: 0x78BE20,
         size: 0.80,
-        backgroundColor:0x30321
+        backgroundColor:0x18
       });
       
       setVantaEffect(effect);
@@ -210,7 +204,7 @@ const HeroSection = () => {
           <div className="flex items-center justify-center mb-8 md:mb-12">
             <h1 className="text-4xl md:text-8xl font-bold tracking-tight flex items-center">
               <Code2 className="w-10 h-10 md:w-16 md:h-16 mr-2 md:mr-4 animate-pulse" />
-              <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-600 bg-clip-text text-transparent animate-text-gradient moving-gradient-text">
+              <span className="bg-gradient-to-r from-[#00629B] to-[#78BE20] bg-clip-text text-transparent animate-text-gradient moving-gradient-text">
                 Decode X
               </span>
             </h1>
@@ -221,15 +215,15 @@ const HeroSection = () => {
             className="grid grid-cols-1 md:flex md:flex-row justify-center gap-2 md:gap-6 mb-8 md:mb-12 w-full md:w-auto px-4 md:px-0"
           >
             <div className="flex items-center justify-center space-x-3 bg-white/5 backdrop-blur-lg px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/10 hover:border-white/20 transition-all hover:scale-105">
-              <Calendar className="h-4 w-4 md:h-5 md:w-5 text-indigo-400" />
+              <Calendar className="h-4 w-4 md:h-5 md:w-5 text-[#00629B]" />
               <span className="text-gray-300 text-xs md:text-sm">June 12-14, 2025</span>
             </div>
             <div className="flex items-center justify-center space-x-3 bg-white/5 backdrop-blur-lg px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/10 hover:border-white/20 transition-all hover:scale-105">
-              <MapPin className="h-4 w-4 md:h-5 md:w-5 text-indigo-400" />
+              <MapPin className="h-4 w-4 md:h-5 md:w-5 text-[#00629B]" />
               <span className="text-gray-300 text-xs md:text-sm">IEEE SPS Campus</span>
             </div>
             <div className="flex items-center justify-center space-x-3 bg-white/5 backdrop-blur-lg px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/10 hover:border-white/20 transition-all hover:scale-105">
-              <Award className="h-4 w-4 md:h-5 md:w-5 text-indigo-400" />
+              <Award className="h-4 w-4 md:h-5 md:w-5 text-[#00629B]" />
               <span className="text-gray-300 text-xs md:text-sm">₹50,000 Prize Pool</span>
             </div>
           </animated.div>
@@ -240,7 +234,7 @@ const HeroSection = () => {
           >
             <Link
               to="/register"
-              className="w-full md:w-auto px-6 md:px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-indigo-500/30 text-base md:text-lg font-medium transform hover:scale-105 text-center"
+              className="w-full md:w-auto px-6 md:px-8 py-3 bg-gradient-to-r from-[#00629B] to-[#78BE20] text-white rounded-full hover:from-[#003a69] hover:to-[#62991a] transition-all shadow-lg hover:shadow-[#00629B]/30 text-base md:text-lg font-medium transform hover:scale-105 text-center"
             >
               Register Now
             </Link>
