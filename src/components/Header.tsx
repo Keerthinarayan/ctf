@@ -60,7 +60,7 @@ const Header: React.FC = () => {
       }`}
     >
       <div 
-        className="h-0.5 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-pink-500 absolute bottom-0 left-0 transition-all duration-300"
+        className="h-0.5 bg-gradient-to-r from-[#004B87] to-[#78BE20] absolute bottom-0 left-0 transition-all duration-300"
         style={{ width: `${scrollProgress}%` }}
       ></div>
       
@@ -72,7 +72,7 @@ const Header: React.FC = () => {
               className="flex items-center space-x-2 text-white group"
             >
               <span className={`text-white transition-opacity duration-500 ${showCodeBracket ? 'opacity-100' : 'opacity-30'}`}>&lt;/&gt;</span>
-              <span className="text-lg font-bold bg-gradient-to-r from-fuchsia-500 via-purple-500 to-pink-600 bg-clip-text text-transparent ml-2">
+              <span className="text-lg font-bold bg-gradient-to-r from-[#004B87] to-[#78BE20] bg-clip-text text-transparent ml-2">
                 DecodeX
               </span>
             </Link>
@@ -81,23 +81,23 @@ const Header: React.FC = () => {
           <nav className="hidden md:flex space-x-8 items-center">
             <Link
               to="/"
-              className={`text-sm font-medium transition-all duration-300 hover:text-purple-400 hover:scale-105 ${
-                location.pathname === '/' ? 'text-purple-400' : 'text-gray-200'
+              className={`text-sm font-medium transition-all duration-300 hover:text-[#78BE20] hover:scale-105 ${
+                location.pathname === '/' ? 'text-[#78BE20]' : 'text-gray-200'
               }`}
             >
               Home
             </Link>
             <Link
-              to="/timeline"
-              className={`text-sm font-medium transition-all duration-300 hover:text-purple-400 hover:scale-105 ${
-                location.pathname === '/timeline' ? 'text-purple-400' : 'text-gray-200'
+              to="/ctf"
+              className={`text-sm font-medium transition-all duration-300 hover:text-[#78BE20] hover:scale-105 ${
+                location.pathname === '/ctf' ? 'text-[#78BE20]' : 'text-gray-200'
               }`}
             >
-              Timeline
+              CTF
             </Link>
             <Link
               to="/register"
-              className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-medium transform hover:from-indigo-700 hover:to-purple-700 hover:scale-105 transition-all"
+              className="px-6 py-2 bg-gradient-to-r from-[#004B87] to-[#78BE20] text-white rounded-full font-medium transform hover:from-[#003a69] hover:to-[#62991a] hover:scale-105 transition-all"
             >
               Register
             </Link>
@@ -125,8 +125,8 @@ const Header: React.FC = () => {
         >
           <div className="flex flex-col p-6">
             <div className="flex items-center mb-8">
-              <Code2 className="h-6 w-6 text-purple-400 mr-2" />
-              <span className="text-xl font-bold bg-gradient-to-r from-fuchsia-500 to-purple-500 bg-clip-text text-transparent">
+              <Code2 className="h-6 w-6 text-[#78BE20] mr-2" />
+              <span className="text-xl font-bold bg-gradient-to-r from-[#004B87] to-[#78BE20] bg-clip-text text-transparent">
                 DecodeX
               </span>
             </div>
@@ -136,27 +136,27 @@ const Header: React.FC = () => {
                 to="/"
                 className={`text-lg font-medium py-2 px-4 rounded-lg transition-all duration-300 ${
                   location.pathname === '/'
-                    ? 'bg-purple-500/10 text-purple-400'
-                    : 'text-gray-200 hover:bg-purple-500/10'
+                    ? 'bg-[#78BE20]/10 text-[#78BE20]'
+                    : 'text-gray-200 hover:bg-[#78BE20]/10'
                 }`}
                 onClick={toggleMenu}
               >
                 Home
               </Link>
               <Link
-                to="/timeline"
+                to="/ctf"
                 className={`text-lg font-medium py-2 px-4 rounded-lg transition-all duration-300 ${
-                  location.pathname === '/timeline'
-                    ? 'bg-purple-500/10 text-purple-400'
-                    : 'text-gray-200 hover:bg-purple-500/10'
+                  location.pathname === '/ctf'
+                    ? 'bg-[#78BE20]/10 text-[#78BE20]'
+                    : 'text-gray-200 hover:bg-[#78BE20]/10'
                 }`}
                 onClick={toggleMenu}
               >
-                Timeline
+                CTF
               </Link>
               <Link
                 to="/register"
-                className="text-lg font-medium py-2 px-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg text-center hover:from-indigo-700 hover:to-purple-700 transition-all"
+                className="text-lg font-medium py-2 px-4 bg-gradient-to-r from-[#004B87] to-[#78BE20] text-white rounded-lg text-center hover:from-[#003a69] hover:to-[#62991a] transition-all"
                 onClick={toggleMenu}
               >
                 Register
