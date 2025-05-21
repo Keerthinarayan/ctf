@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import RegistrationSection from '../components/RegistrationSection';
 
 const RegistrationPage: React.FC = () => {
+    // Scroll to top on mount
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+
   return (
     <div className="pt-20">
       <div className="py-12 bg-gradient-to-r from-slate-900 to-slate-800">
