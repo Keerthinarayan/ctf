@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Calendar, Clock, MapPin, Award } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface TimelineEvent {
   date: string;
@@ -11,6 +12,12 @@ interface TimelineEvent {
 }
 
 const TimelineSection: React.FC = () => {
+
+    // Scroll to top on mount
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+
   const timelineEvents: TimelineEvent[] = [
     {
       date: "June 12, 2025",
@@ -104,8 +111,17 @@ const TimelineSection: React.FC = () => {
                             <span className="mx-2">•</span>
                             <MapPin className="h-4 w-4 mr-1" />
                             <span>{event.location}</span>
+                            {event.title === "Industrial Visit" && (
+                              <Link
+                                to="/aboutevent"
+                                className="ml-4 w-full md:w-auto px-6 md:px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-indigo-500/30 text-base md:text-lg font-medium transform hover:scale-105 text-center"
+                              >
+                                About Event
+                              </Link>
+                            )}
                           </>
                         )}
+
                       </div>
                     </div>
                   </div>
