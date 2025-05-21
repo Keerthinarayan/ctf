@@ -4,11 +4,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        indigo: {
-          950: '#1e1b4b',
-        },
-        purple: {
-          950: '#4c1d95',
+        ieee: {
+          blue: {
+            light: '#0063b3',
+            DEFAULT: '#004B87',
+            dark: '#003a69',
+          },
+          green: {
+            light: '#8cd42a',
+            DEFAULT: '#78BE20',
+            dark: '#62991a',
+          }
         },
         slate: {
           950: '#0f172a',
@@ -34,5 +40,32 @@ export default {
       },
     },
   },
-  plugins: [],
-};
+  plugins: [
+    function({ addUtilities }) {
+      addUtilities({
+        '.bg-gradient-ieee': {
+          'background-image': 'linear-gradient(to right, var(--tw-gradient-stops))',
+          '--tw-gradient-from': '#004B87',
+          '--tw-gradient-to': '#78BE20',
+          '--tw-gradient-stops': 'var(--tw-gradient-from), #0063b3, var(--tw-gradient-to)',
+        },
+        '.text-gradient-ieee': {
+          'background-image': 'linear-gradient(to right, #004B87, #0063b3, #78BE20)',
+          '-webkit-background-clip': 'text',
+          'background-clip': 'text',
+          'color': 'transparent',
+        },
+        '.button-ieee': {
+          'background-image': 'linear-gradient(to right, #004B87, #78BE20)',
+          'color': '#fff',
+          'transition': 'all 0.3s ease',
+          'box-shadow': '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+          '&:hover': {
+            'background-image': 'linear-gradient(to right, #003a69, #62991a)',
+            'box-shadow': '0 10px 15px -3px rgba(0, 98, 155, 0.2)',
+          }
+        }
+      })
+    }
+  ],
+}
