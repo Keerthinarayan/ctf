@@ -6,6 +6,7 @@ import RegistrationPage from './pages/RegistrationPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
+import { AboutEventPage }  from './pages/AboutEventPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/timeline" element={<TimelinePage />} />
             <Route path="/register" element={<RegistrationPage />} />
+            <Route path="/aboutevent" element={<AboutEventPage />} />
           </Routes>
         </main>
         <div className="h-[2px] bg-gradient-to-r from-pink-600 via-purple-500 to-indigo-500 animate-gradient"></div>
