@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Shield, Terminal, Brain, Flag, Clock, Users, Award, Link as LinkIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import PrizeSection from '../components/PrizeSection';
 
 const CTFPage: React.FC = () => {
   useEffect(() => {
@@ -151,20 +152,8 @@ const CTFPage: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-b from-[#004B87]/20 to-slate-900">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8">Ready to Accept the Challenge?</h2>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link
-              to="/register"
-              className="px-8 py-3 bg-gradient-to-r from-[#004B87] to-[#78BE20] text-white rounded-full hover:from-[#003a69] hover:to-[#62991a] transition-all shadow-lg hover:shadow-[#004B87]/20 transform hover:scale-105"
-            >
-              Register Now
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Prize Section */}
+      <PrizeSection />
     </div>
   );
 };
