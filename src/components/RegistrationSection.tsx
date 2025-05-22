@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { User, Phone, Mail, Users, School, GraduationCap, Building2 } from 'lucide-react';
 import { supabaseClient } from '../services/supabaseClient';
+import RegistrationPopup from './RegistrationPopup';
 
 interface TeamMember {
   name: string;
@@ -24,6 +25,7 @@ const RegistrationSection: React.FC = () => {
   const [utrError, setUtrError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const getFee = () => {
     switch (membershipStatus) {
@@ -106,6 +108,7 @@ const RegistrationSection: React.FC = () => {
         type: 'error',
         message: 'Please fill all required fields correctly before submitting.',
       });
+      setIsPopupOpen(true);
       return;
     }
 
@@ -139,6 +142,7 @@ const RegistrationSection: React.FC = () => {
         type: 'success',
         message: 'Registration successful! Thank you for registering.',
       });
+      setIsPopupOpen(true);
 
       setTeamName('');
       setCaptainName('');
@@ -163,6 +167,7 @@ const RegistrationSection: React.FC = () => {
           ? 'Registration failed: Email or UTR number already exists.'
           : 'Registration failed. Please try again.',
       });
+      setIsPopupOpen(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -412,6 +417,14 @@ const RegistrationSection: React.FC = () => {
           </form>
         </div>
       </div>
+      {submitStatus && isPopupOpen && (
+        <RegistrationPopup
+          type={submitStatus.type}
+          message={submitStatus.message}
+          isOpen={isPopupOpen}
+          onClose={() => setIsPopupOpen(false)}
+        />
+      )}
     </section>
   );
 };
