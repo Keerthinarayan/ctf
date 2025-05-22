@@ -8,7 +8,7 @@ const RegistrationSectionIV: React.FC = () => {
   const [phoneError, setPhoneError] = useState('');
   const [semester, setSemester] = useState('');
   const [branch, setBranch] = useState('');
-  const [membershipStatus, setMembershipStatus] = useState('Non-IEEE');
+  const [membershipStatus, setMembershipStatus] = useState('Non-SPS');
   const [membershipId, setMembershipId] = useState('');
   const [membershipIdError, setMembershipIdError] = useState('');
   const [utrNumber, setUtrNumber] = useState('');
@@ -16,14 +16,7 @@ const RegistrationSectionIV: React.FC = () => {
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   const getFee = () => {
-    switch (membershipStatus) {
-      case 'SPS IEEE':
-        return 300;
-      case 'IEEE':
-        return 400;
-      default:
-        return 500;
-    }
+    return membershipStatus === 'SPS' ? 0 : 200;
   };
 
   const handlePhoneChange = (value: string) => {
@@ -50,7 +43,7 @@ const RegistrationSectionIV: React.FC = () => {
     const digitsOnly = value.replace(/\D/g, '');
     setMembershipId(digitsOnly);
     if (digitsOnly.length > 0 && digitsOnly.length !== 8) {
-      setMembershipIdError('IEEE Membership ID must be exactly 8 digits');
+      setMembershipIdError('IEEE SPS Membership ID must be exactly 8 digits');
     } else {
       setMembershipIdError('');
     }
@@ -153,9 +146,9 @@ const RegistrationSectionIV: React.FC = () => {
               </div>
             </div>
 
-            {/* IEEE Membership Section */}
+            {/* IEEE SPS Membership Section */}
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
-              <h3 className="text-xl font-semibold text-white mb-4">IEEE Membership</h3>
+              <h3 className="text-xl font-semibold text-white mb-4">IEEE SPS Membership</h3>
               <div className="space-y-6">
                 <select
                   value={membershipStatus}
@@ -163,11 +156,10 @@ const RegistrationSectionIV: React.FC = () => {
                   required
                   className="w-full px-4 py-2 bg-slate-900/50 border border-[#78BE20]/30 rounded-lg focus:ring-2 focus:ring-[#78BE20] focus:border-transparent text-gray-300"
                 >
-                  <option value="Non-IEEE">Non-IEEE</option>
-                  <option value="IEEE">IEEE</option>
-                  <option value="SPS IEEE">SPS IEEE</option>
+                  <option value="Non-SPS">Non-SPS Member</option>
+                  <option value="SPS">SPS Member</option>
                 </select>
-                {membershipStatus !== 'Non-IEEE' && (
+                {membershipStatus === 'SPS' && (
                   <div className="relative">
                     <input
                       type="text"
@@ -178,48 +170,55 @@ const RegistrationSectionIV: React.FC = () => {
                       className={`w-full px-4 py-2 bg-slate-900/50 border ${
                         membershipIdError ? 'border-red-500' : 'border-[#78BE20]/30'
                       } rounded-lg focus:ring-2 focus:ring-[#78BE20] focus:border-transparent text-gray-300`}
-                      placeholder="Enter 8-digit membership ID"
+                      placeholder="Enter 8-digit SPS membership ID"
                     />
                     {membershipIdError && <p className="text-red-500 text-xs mt-1">{membershipIdError}</p>}
+                    <p className="text-yellow-400 text-sm mt-2">
+                      Note: Your SPS membership ID will be verified from our database
+                    </p>
                   </div>
                 )}
                 <div className="p-4 bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 rounded-xl border border-[#78BE20]/30">
                   <p className="text-lg font-semibold text-white">Registration Fee: ₹{getFee()}</p>
-                  <p className="text-sm text-gray-400 mt-1">Based on your membership status</p>
+                  <p className="text-sm text-gray-400 mt-1">
+                    {membershipStatus === 'SPS' ? 'Free for SPS members' : 'Registration fee for non-SPS members'}
+                  </p>
                 </div>
               </div>
             </div>
 
-            {/* Payment Details Section */}
-            <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
-              <h3 className="text-xl font-semibold text-white mb-4">Payment Details</h3>
-              <div className="space-y-6">
-                <div className="flex justify-center">
-                  <div className="w-64 h-64 bg-slate-900/50 rounded-xl border border-[#78BE20]/30 flex items-center justify-center">
-                    <img
-                      src="https://i.imgur.com/QR-Code.png"
-                      alt="Google Pay QR Code"
-                      className="max-w-full max-h-full p-4"
+            {/* Payment Section - Only shown for Non-SPS members */}
+            {membershipStatus === 'Non-SPS' && (
+              <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
+                <h3 className="text-xl font-semibold text-white mb-4">Payment Details</h3>
+                <div className="space-y-6">
+                  <div className="flex justify-center">
+                    <div className="w-64 h-64 bg-slate-900/50 rounded-xl border border-[#78BE20]/30 flex items-center justify-center">
+                      <img
+                        src="https://i.imgur.com/QR-Code.png"
+                        alt="Google Pay QR Code"
+                        className="max-w-full max-h-full p-4"
+                      />
+                    </div>
+                  </div>
+                  <div className="relative">
+                    <CreditCard className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#78BE20] h-5 w-5" />
+                    <input
+                      type="text"
+                      value={utrNumber}
+                      onChange={(e) => handleUtrChange(e.target.value)}
+                      required
+                      maxLength={12}
+                      className={`w-full pl-10 pr-4 py-2 bg-slate-900/50 border ${
+                        utrError ? 'border-red-500' : 'border-[#78BE20]/30'
+                      } rounded-lg focus:ring-2 focus:ring-[#78BE20] focus:border-transparent text-gray-300`}
+                      placeholder="Enter 12-character UTR number"
                     />
+                    {utrError && <p className="text-red-500 text-xs mt-1">{utrError}</p>}
                   </div>
                 </div>
-                <div className="relative">
-                  <CreditCard className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#78BE20] h-5 w-5" />
-                  <input
-                    type="text"
-                    value={utrNumber}
-                    onChange={(e) => handleUtrChange(e.target.value)}
-                    required
-                    maxLength={12}
-                    className={`w-full pl-10 pr-4 py-2 bg-slate-900/50 border ${
-                      utrError ? 'border-red-500' : 'border-[#78BE20]/30'
-                    } rounded-lg focus:ring-2 focus:ring-[#78BE20] focus:border-transparent text-gray-300`}
-                    placeholder="Enter 12-character UTR number"
-                  />
-                  {utrError && <p className="text-red-500 text-xs mt-1">{utrError}</p>}
-                </div>
               </div>
-            </div>
+            )}
 
             {/* Submit Button */}
             <div className="flex justify-center">
