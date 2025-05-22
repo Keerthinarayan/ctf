@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { User, Phone, Mail, GraduationCap, School, CreditCard } from 'lucide-react';
+import { supabaseClient } from '../services/supabaseClient';
 
 const RegistrationSectionIV: React.FC = () => {
   const [name, setName] = useState('');
@@ -14,6 +15,7 @@ const RegistrationSectionIV: React.FC = () => {
   const [utrNumber, setUtrNumber] = useState('');
   const [utrError, setUtrError] = useState('');
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const getFee = () => {
     return membershipStatus === 'SPS' ? 0 : 200;
@@ -49,9 +51,99 @@ const RegistrationSectionIV: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateForm = () => {
+    // Check for errors
+    if (phoneError || utrError || membershipIdError) return false;
+    
+    // Name: max 30 characters
+    if (name.length > 30) {
+      setSubmitStatus({ type: 'error', message: 'Name must not exceed 30 characters.' });
+      return false;
+    }
+    
+    // Email: max 50 characters and contains '@'
+    if (email.length > 50 || !email.includes('@')) {
+      setSubmitStatus({ type: 'error', message: 'Email must be valid and not exceed 50 characters.' });
+      return false;
+    }
+    
+    // Phone: exactly 10 digits
+    if (phone.length !== 10) {
+      setPhoneError('Phone number must be exactly 10 digits');
+      return false;
+    }
+    
+    // Semester: 1-8
+    const sem = parseInt(semester, 10);
+    if (isNaN(sem) || sem < 1 || sem > 8) {
+      setSubmitStatus({ type: 'error', message: 'Semester must be between 1 and 8.' });
+      return false;
+    }
+    
+    // Branch: max 30 characters
+    if (branch.length > 30) {
+      setSubmitStatus({ type: 'error', message: 'Branch must not exceed 30 characters.' });
+      return false;
+    }
+    
+    // Membership constraints
+    if (membershipStatus === 'SPS') {
+      if (membershipId.length !== 8) {
+        setMembershipIdError('IEEE SPS Membership ID must be exactly 8 digits');
+        return false;
+      }
+    } else if (membershipStatus === 'Non-SPS') {
+      if (utrNumber.length !== 12) {
+        setUtrError('UTR number must be exactly 12 characters');
+        return false;
+      }
+    }
+    
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitStatus({ type: 'success', message: 'Registration submitted!' });
+    
+    if (!validateForm()) {
+      if (!submitStatus) setSubmitStatus({ type: 'error', message: 'Please correct the errors in the form.' });
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    const data = {
+      name,
+      email,
+      phone_number: phone,
+      semester: parseInt(semester, 10),
+      branch,
+      membership_type: membershipStatus,
+      membership_id: membershipStatus === 'SPS' ? membershipId : null,
+      utr_number: membershipStatus === 'Non-SPS' ? utrNumber : null,
+    };
+
+    try {
+      const { error } = await supabaseClient.from('visit_registrations').insert([data]);
+      if (error) throw error;
+      
+      setSubmitStatus({ type: 'success', message: 'Registration submitted successfully!' });
+      // Reset form
+      setName('');
+      setEmail('');
+      setPhone('');
+      setSemester('');
+      setBranch('');
+      setMembershipStatus('Non-SPS');
+      setMembershipId('');
+      setUtrNumber('');
+    } catch (error) {
+      console.error('Submission error:', error);
+      setSubmitStatus({ type: 'error', message: 'Failed to submit registration. Please try again.' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -82,6 +174,7 @@ const RegistrationSectionIV: React.FC = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
+                    maxLength={30}
                     className="w-full pl-10 pr-4 py-2 bg-slate-900/50 border border-[#78BE20]/30 rounded-lg focus:ring-2 focus:ring-[#78BE20] focus:border-transparent text-gray-300"
                     placeholder="Enter your name"
                   />
@@ -93,6 +186,7 @@ const RegistrationSectionIV: React.FC = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    maxLength={50}
                     className="w-full pl-10 pr-4 py-2 bg-slate-900/50 border border-[#78BE20]/30 rounded-lg focus:ring-2 focus:ring-[#78BE20] focus:border-transparent text-gray-300"
                     placeholder="Enter your email address"
                   />
@@ -139,6 +233,7 @@ const RegistrationSectionIV: React.FC = () => {
                     value={branch}
                     onChange={(e) => setBranch(e.target.value)}
                     required
+                    maxLength={30}
                     className="w-full pl-10 pr-4 py-2 bg-slate-900/50 border border-[#78BE20]/30 rounded-lg focus:ring-2 focus:ring-[#78BE20] focus:border-transparent text-gray-300"
                     placeholder="Enter your branch"
                   />
@@ -224,9 +319,12 @@ const RegistrationSectionIV: React.FC = () => {
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="px-8 py-3 bg-gradient-to-r from-[#004B87] to-[#78BE20] text-white rounded-full hover:from-[#003a69] hover:to-[#62991a] transition-all shadow-lg hover:shadow-[#004B87]/20 transform hover:scale-105"
+                disabled={isSubmitting}
+                className={`px-8 py-3 bg-gradient-to-r from-[#004B87] to-[#78BE20] text-white rounded-full hover:from-[#003a69] hover:to-[#62991a] transition-all shadow-lg hover:shadow-[#004B87]/20 transform hover:scale-105 ${
+                  isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
               >
-                Register Now
+                {isSubmitting ? 'Submitting...' : 'Register Now'}
               </button>
             </div>
 
