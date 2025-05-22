@@ -1,8 +1,39 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Calendar, Clock, MapPin, Award, Link as LinkIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const TimelineSection: React.FC = () => {
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const [lineHeight, setLineHeight] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!timelineRef.current) return;
+
+      const timelineElement = timelineRef.current;
+      const rect = timelineElement.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Calculate how much of the timeline is visible
+      const timelineTop = rect.top;
+      const timelineHeight = rect.height;
+      
+      // Start animation when timeline enters viewport
+      if (timelineTop < windowHeight && timelineTop + timelineHeight > 0) {
+        // Calculate scroll progress through the timeline (faster animation)
+        const scrollProgress = Math.max(0, Math.min(1, (windowHeight - timelineTop) / (windowHeight * 0.6 + timelineHeight)));
+        
+        // Set line height based on scroll progress
+        setLineHeight(scrollProgress * 100);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial call
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const timelineEvents = [
     {
       date: "June 12, 2025",
@@ -67,8 +98,18 @@ const TimelineSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="relative">
-          <div className="absolute left-1/2 -ml-px w-0.5 h-full bg-gradient-to-b from-[#004B87] to-[#78BE20] hidden md:block"></div>
+        <div className="relative" ref={timelineRef}>
+          {/* Static background line - starts from first dot to last dot */}
+          <div className="absolute left-1/2 -ml-px w-0.5 bg-gray-700/30 hidden md:block" style={{ top: '40px', height: 'calc(100% - 200px)' }}></div>
+          
+          {/* Animated line that grows with scroll - starts from first dot */}
+          <div 
+            className="absolute left-1/2 -ml-px w-0.5 bg-gradient-to-b from-[#004B87] to-[#78BE20] hidden md:block transition-all duration-300 ease-out"
+            style={{ 
+              top: '40px', 
+              height: `${(lineHeight / 100) * (timelineRef.current?.offsetHeight ? timelineRef.current.offsetHeight - 200 : 0)}px` 
+            }}
+          ></div>
 
           <div className="space-y-12">
             {timelineEvents.map((event, index) => (
