@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { User, Phone, Mail, GraduationCap, School, CreditCard } from 'lucide-react';
 import { supabaseClient } from '../services/supabaseClient';
+import RegistrationPopup from './RegistrationPopup';
 
 const RegistrationSectionIV: React.FC = () => {
   const [name, setName] = useState('');
@@ -16,6 +17,7 @@ const RegistrationSectionIV: React.FC = () => {
   const [utrError, setUtrError] = useState('');
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const getFee = () => {
     return membershipStatus === 'SPS' ? 0 : 200;
@@ -106,7 +108,13 @@ const RegistrationSectionIV: React.FC = () => {
     e.preventDefault();
     
     if (!validateForm()) {
-      if (!submitStatus) setSubmitStatus({ type: 'error', message: 'Please correct the errors in the form.' });
+      if (!submitStatus) {
+        setSubmitStatus({ 
+          type: 'error', 
+          message: 'Please correct the errors in the form.' 
+        });
+        setIsPopupOpen(true);
+      }
       return;
     }
 
@@ -128,7 +136,12 @@ const RegistrationSectionIV: React.FC = () => {
       const { error } = await supabaseClient.from('visit_registrations').insert([data]);
       if (error) throw error;
       
-      setSubmitStatus({ type: 'success', message: 'Registration submitted successfully!' });
+      setSubmitStatus({ 
+        type: 'success', 
+        message: 'Registration submitted successfully!' 
+      });
+      setIsPopupOpen(true);
+
       // Reset form
       setName('');
       setEmail('');
@@ -140,7 +153,11 @@ const RegistrationSectionIV: React.FC = () => {
       setUtrNumber('');
     } catch (error) {
       console.error('Submission error:', error);
-      setSubmitStatus({ type: 'error', message: 'Failed to submit registration. Please try again.' });
+      setSubmitStatus({ 
+        type: 'error', 
+        message: 'Failed to submit registration. Please try again.' 
+      });
+      setIsPopupOpen(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -345,6 +362,15 @@ const RegistrationSectionIV: React.FC = () => {
           </form>
         </div>
       </div>
+      
+      {submitStatus && isPopupOpen && (
+        <RegistrationPopup
+          type={submitStatus.type}
+          message={submitStatus.message}
+          isOpen={isPopupOpen}
+          onClose={() => setIsPopupOpen(false)}
+        />
+      )}
     </section>
   );
 };
