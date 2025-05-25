@@ -6,7 +6,8 @@ import RegistrationPage from './pages/RegistrationPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
-import { AboutEventPage }  from './pages/AboutEventPage';
+import { AboutEventPage } from './pages/AboutEventPage';
+import IndustrialVisitPage from './pages/IndustrialVisitPage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/ctf" element={<CTFPage />} />
             <Route path="/register" element={<RegistrationPage />} />
             <Route path="/aboutevent" element={<AboutEventPage />} />
+            <Route path="/industrial-visit" element={<IndustrialVisitPage />} />
           </Routes>
         </main>
         <div className="h-[2px] bg-gradient-to-r from-[#78BE20] to-[#004B87] animate-gradient"></div>
