@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trophy, Award, Medal } from 'lucide-react';
+import { Trophy, Award, Medal, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const PrizeSection: React.FC = () => {
@@ -12,55 +12,51 @@ const PrizeSection: React.FC = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#004B87] to-[#78BE20] mx-auto mb-6"></div>
           <p className="max-w-3xl mx-auto text-gray-300 text-lg">
-            Compete for a total prize pool of ₹50,000 and gain recognition for your innovative solutions.
+            Compete for a total prize pool of ₹65,000 and gain recognition for your innovative solutions.
           </p>
         </div>
 
         <div className="flex flex-wrap justify-center gap-8">
           {/* First Place - Gold */}
-          <div className="relative p-1 bg-gradient-to-r from-yellow-500 to-yellow-300 rounded-2xl transform transition duration-300 hover:scale-105 max-w-sm w-full shadow-lg shadow-yellow-500/20">
-            <div className="bg-slate-900 rounded-xl p-8 h-full">
+          <div className="relative p-1 rounded-2xl transform transition duration-300 hover:scale-105 max-w-sm w-full shadow-lg shadow-yellow-500/20 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-yellow-300 animate-pulse rounded-2xl"></div>
+            <div className="relative bg-slate-900 rounded-xl p-8 h-full">
               <div className="flex flex-col items-center">
                 <Trophy className="h-20 w-20 text-yellow-400 mb-6" />
                 <h3 className="text-2xl font-bold text-white mb-2">1st Prize</h3>
                 <div className="text-yellow-400 text-4xl font-bold mb-4">₹25,000</div>
                 <ul className="text-gray-300 space-y-2 text-center">
-                  <li>Gold Trophy</li>
-                  <li>Certificates</li>
-                  <li>Industry Recognition</li>
-                  <li>Internship Opportunities</li>
+                  {/* Add any list items here if needed */}
                 </ul>
               </div>
             </div>
           </div>
 
           {/* Second Place - Silver */}
-          <div className="relative p-1 bg-gradient-to-r from-gray-300 to-gray-400 rounded-2xl transform transition duration-300 hover:scale-105 max-w-sm w-full shadow-lg shadow-gray-400/20">
-            <div className="bg-slate-900 rounded-xl p-8 h-full">
+          <div className="relative p-1 rounded-2xl transform transition duration-300 hover:scale-105 max-w-sm w-full shadow-lg shadow-gray-400/20 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-300 to-gray-400 animate-pulse rounded-2xl"></div>
+            <div className="relative bg-slate-900 rounded-xl p-8 h-full">
               <div className="flex flex-col items-center">
                 <Award className="h-16 w-16 text-gray-300 mb-6" />
                 <h3 className="text-2xl font-bold text-white mb-2">2nd Prize</h3>
                 <div className="text-gray-300 text-3xl font-bold mb-4">₹15,000</div>
                 <ul className="text-gray-300 space-y-2 text-center">
-                  <li>Silver Trophy</li>
-                  <li>Certificates</li>
-                  <li>Industry Recognition</li>
+                  {/* Add any list items here if needed */}
                 </ul>
               </div>
             </div>
           </div>
 
           {/* Third Place - Bronze */}
-          <div className="relative p-1 bg-gradient-to-r from-amber-600 to-amber-400 rounded-2xl transform transition duration-300 hover:scale-105 max-w-sm w-full shadow-lg shadow-amber-600/20">
-            <div className="bg-slate-900 rounded-xl p-8 h-full">
+          <div className="relative p-1 rounded-2xl transform transition duration-300 hover:scale-105 max-w-sm w-full shadow-lg shadow-amber-600/20 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-amber-400 animate-pulse rounded-2xl"></div>
+            <div className="relative bg-slate-900 rounded-xl p-8 h-full">
               <div className="flex flex-col items-center">
                 <Medal className="h-16 w-16 text-amber-500 mb-6" />
                 <h3 className="text-2xl font-bold text-white mb-2">3rd Prize</h3>
                 <div className="text-amber-500 text-3xl font-bold mb-4">₹10,000</div>
                 <ul className="text-gray-300 space-y-2 text-center">
-                  <li>Bronze Trophy</li>
-                  <li>Certificates</li>
-                  <li>Industry Recognition</li>
+                  {/* Add any list items here if needed */}
                 </ul>
               </div>
             </div>
@@ -68,9 +64,9 @@ const PrizeSection: React.FC = () => {
         </div>
 
         {/* Special Mentions */}
-        <div className="mt-12 p-6 bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-2xl border border-[#78BE20]/30 shadow-xl max-w-3xl mx-auto">
+        <div className="mt-12 p-6 bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-2xl border border-[#78BE20]/30 shadow-xl max-w-4xl mx-auto">
           <h3 className="text-xl font-bold text-white mb-4 text-center">Additional Prizes</h3>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-3 gap-4">
             <div className="p-4 bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 rounded-lg border border-[#78BE20]/30">
               <div className="font-semibold text-[#78BE20] mb-1">Best Innovation Award</div>
               <div className="text-gray-300">₹5,000 + Innovation Certificate</div>
@@ -78,6 +74,13 @@ const PrizeSection: React.FC = () => {
             <div className="p-4 bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 rounded-lg border border-[#78BE20]/30">
               <div className="font-semibold text-[#78BE20] mb-1">Best Design Award</div>
               <div className="text-gray-300">₹5,000 + Design Excellence Certificate</div>
+            </div>
+            <div className="p-4 bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 rounded-lg border border-[#78BE20]/30">
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-[#78BE20]" />
+                <div className="font-semibold text-[#78BE20]">Special Mention</div>
+              </div>
+              <div className="text-gray-300">₹5,000 + Recognition Certificate</div>
             </div>
           </div>
         </div>
@@ -88,7 +91,7 @@ const PrizeSection: React.FC = () => {
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               to="/register"
-              className="px-8 py-3 bg-gradient-to-r from-[#004B87] to-[#78BE20] text-white rounded-full hover:from-[#003a69] hover:to-[#62991a] transition-all shadow-lg hover  :shadow-[#004B87]/20 transform hover:scale-105"
+              className="px-8 py-3 bg-gradient-to-r from-[#004B87] to-[#78BE20] text-white rounded-full hover:from-[#003a69] hover:to-[#62991a] transition-all shadow-lg hover:shadow-[#004B87]/20 transform hover:scale-105"
             >
               Register Now
             </Link>
