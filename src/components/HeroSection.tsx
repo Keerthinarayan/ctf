@@ -186,8 +186,8 @@ const HeroSection = () => {
           <animated.div style={props} className="flex flex-wrap justify-center gap-3 mb-6 md:mb-8 max-w-2xl">
             {[
               { icon: Calendar, text: 'June 12-14, 2025' },
-              { icon: MapPin, text: 'IEEE SPS Campus' },
-              { icon: Award, text: '₹50,000 Prize Pool' }
+              { icon: MapPin, text: 'APJ Lab , BMSITM' },
+              { icon: Award, text: '₹65,000 Prize Pool' }
             ].map((item, index) => (
               <div key={index} className="flex items-center bg-white/5 backdrop-blur-lg px-4 py-2 rounded-full border border-white/10 hover:border-white/20 transition-all">
                 <item.icon className="h-4 w-4 md:h-5 md:w-5 text-[#00629B] mr-2" />
