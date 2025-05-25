@@ -34,8 +34,8 @@ const CTFPage: React.FC = () => {
   const rounds = [
     {
       title: "Round 1: Qualification",
-      date: "October 15, 2023",
-      time: "10:00 AM - 1:00 PM",
+      date: "June 13, 2025",
+      time: "10:00 AM - 4:00 PM",
       description: "Teams solve basic challenges across all categories to qualify for the main event. Top 20 teams advance.",
       points: [
         "Basic challenges in all categories",
@@ -46,8 +46,8 @@ const CTFPage: React.FC = () => {
     },
     {
       title: "Round 2: Advanced Challenges",
-      date: "October 15, 2023",
-      time: "2:00 PM - 6:00 PM",
+      date: "June 13 - June 14, 2025",
+      time: "5:00 PM - 7:00 AM",
       description: "Qualified teams tackle more complex challenges with increased difficulty and point values.",
       points: [
         "Advanced challenge sets",
@@ -58,8 +58,8 @@ const CTFPage: React.FC = () => {
     },
     {
       title: "Round 3: Final Sprint",
-      date: "October 15, 2023",
-      time: "7:00 PM - 10:00 PM",
+      date: "June 14, 2025",
+      time: "8:00 AM - 12:00 PM",
       description: "The ultimate test with the most challenging problems and highest point values.",
       points: [
         "Expert-level challenges",
