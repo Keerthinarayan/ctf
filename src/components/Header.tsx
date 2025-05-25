@@ -93,7 +93,15 @@ const Header: React.FC = () => {
                 location.pathname === '/ctf' ? 'text-[#78BE20]' : 'text-gray-200'
               }`}
             >
-              CTF
+              CTS
+            </Link>
+            <Link
+              to="/industrial-visit"
+              className={`text-sm font-medium transition-all duration-300 hover:text-[#78BE20] hover:scale-105 ${
+                location.pathname === '/industrial-visit' ? 'text-[#78BE20]' : 'text-gray-200'
+              }`}
+            >
+              Industrial Visit
             </Link>
             <Link
               to="/register"
@@ -152,7 +160,18 @@ const Header: React.FC = () => {
                 }`}
                 onClick={toggleMenu}
               >
-                CTF
+                CTS
+              </Link>
+              <Link
+                to="/industrial-visit"
+                className={`text-lg font-medium py-2 px-4 rounded-lg transition-all duration-300 ${
+                  location.pathname === '/industrial-visit'
+                    ? 'bg-[#78BE20]/10 text-[#78BE20]'
+                    : 'text-gray-200 hover:bg-[#78BE20]/10'
+                }`}
+                onClick={toggleMenu}
+              >
+                Industrial Visit
               </Link>
               <Link
                 to="/register"
