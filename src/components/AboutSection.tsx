@@ -7,22 +7,22 @@ const AboutSection: React.FC = () => {
     {
       icon: <Code className="h-6 w-6" />,
       title: 'Challenging Problems',
-      description: 'Tackle real-world complex coding challenges designed by industry experts.',
+      description: 'Face off in intense, signal-based puzzles and elimination rounds designed to push your problem-solving to the limit.',
     },
     {
       icon: <Cpu className="h-6 w-6" />,
       title: 'Learn & Network',
-      description: 'Connect with fellow developers and industry professionals throughout the event.',
+      description: 'Build connections with peers and industry experts as you progress through the event',
     },
     {
       icon: <Zap className="h-6 w-6" />,
-      title: '24-Hour Sprint',
-      description: 'Push your limits in an intensive coding marathon spanning 24 hours.',
+      title: '24-Hour Showdown',
+      description: 'Compete in an intense, round-the-clock challenge where every signal decoded brings you closer to the top.',
     },
     {
       icon: <Trophy className="h-6 w-6" />,
-      title: 'Attractive Prizes',
-      description: 'Compete for a prize pool of ₹50,000 and recognition from industry leaders.',
+      title: 'Big Rewards. Swag and Fame.',
+      description: 'A prize pool of ₹65,000 and unique, limited-edition goodies await an experience like no other.',
     },
   ];
 
@@ -44,7 +44,7 @@ const AboutSection: React.FC = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#004B87] to-[#78BE20] mx-auto mb-8"></div>
           <p className="max-w-3xl mx-auto text-gray-300 text-xl md:text-lg px-4 md:px-0 leading-relaxed">
-            DecodeX is the premier 24-hour hackathon organized by IEEE SPS, bringing together the brightest minds to solve complex problems and innovate.
+            DecodeX is the flagship event hosted by the IEEE Signal Processing Society at BMSITM, designed to provide participants with a comprehensive and immersive experience in the field of Signal Processing blending industrial exposure, technical exploration, and hands-on competition.
           </p>
         </div>
 
@@ -54,13 +54,13 @@ const AboutSection: React.FC = () => {
             <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-white">What is DecodeX?</h3>
             <div className="space-y-4">
               <p className="text-gray-300 text-base md:text-lg leading-relaxed">
-                DecodeX is IEEE SPS's flagship 24-hour hackathon where participants decode, develop, and innovate.
+                DecodeX is an All-Out, 3 day Comprehensive Signal Processing experience who love a good brain burn.
               </p>
               <ul className="list-disc list-inside text-gray-300 space-y-2 ml-4">
-                <li>Industrial visit to leading tech companies</li>
-                <li>24-hour intensive coding challenge</li>
-                <li>Three strategic competition rounds</li>
-                <li>Expert mentorship throughout</li>
+                <li><strong>Day 1:</strong> Industrial Visit to leading tech companies(TBD)</li>
+                <li><strong>Day 2 - 3: </strong> Dive into Capture the Signal, an overnight tech challenge</li>
+                <li>Three rounds combining puzzles, signal analysis, ML, and hardware.</li>
+                <li>Connect with experts from Industry, Academia, and Alumni.</li>
               </ul>
             </div>
           </div>
@@ -70,14 +70,14 @@ const AboutSection: React.FC = () => {
             <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-white">Why Participate?</h3>
             <div className="space-y-4">
               <p className="text-gray-300 text-base md:text-lg leading-relaxed">
-                DecodeX offers more than just competition—it's a growth opportunity.
+                DecodeX goes beyond competition, it’s your launchpad for growth.
               </p>
               <ul className="list-disc list-inside text-gray-300 space-y-2 ml-4">
-                <li>Solve real-world industry problems</li>
-                <li>Get direct feedback from mentors</li>
-                <li>Win from a ₹50,000 prize pool</li>
-                <li>Network with industry professionals</li>
-                <li>Enhance your portfolio</li>
+                <li>Compete for a massive ₹65,000 prize pool and bragging rights!</li>
+                <li>Explore cutting-edge tech through an exclusive industrial visit</li>
+                <li>Sharpen your skills with tough signal processing challenges</li>
+                <li>Collaborate and connect with like minded enthusiasts </li>
+                <li>Grow your portfolio which showcase worthy experience </li>
               </ul>
             </div>
           </div>
