@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
 import TimelineSection from '../components/TimelineSection';
+import SponsorsSection from '../components/SponsorsSection';
 
 const HomePage: React.FC = () => {
   useEffect(() => {
@@ -13,6 +14,7 @@ const HomePage: React.FC = () => {
       <HeroSection />
       <AboutSection />
       <TimelineSection />
+      <SponsorsSection />
     </div>
   );
 };
