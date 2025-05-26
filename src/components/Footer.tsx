@@ -39,12 +39,14 @@ const Footer: React.FC = () => {
               <li>
                 <Link to="/" className="hover:text-[#78BE20] transition-colors">Home</Link>
               </li>
+              
               <li>
-                <Link to="/ctf" className="hover:text-[#78BE20] transition-colors">CTF</Link>
+                <Link to="/ctf" className="hover:text-[#78BE20] transition-colors">CTS</Link>
               </li>
               <li>
-                <Link to="/aboutevent" className="hover:text-[#78BE20] transition-colors">About Event</Link>
+                <Link to="/industrial-visit" className="hover:text-[#78BE20] transition-colors">Industrial Visit</Link>
               </li>
+             
               <li>
                 <Link to="/register" className="hover:text-[#78BE20] transition-colors">Register</Link>
               </li>
