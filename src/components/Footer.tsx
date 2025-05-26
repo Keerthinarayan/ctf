@@ -61,8 +61,8 @@ const Footer: React.FC = () => {
                 <span>Industrial Visit</span>
               </li>
               <li className="flex items-center">
-                <span className="w-24">June 13, 2025</span>
-                <span>CTF Event</span>
+                <span className="w-24">June 13-14, 2025</span>
+                <span>CTS Event</span>
               </li>
               <li className="flex items-center">
                 <span className="w-24">June 14, 2025</span>
@@ -76,7 +76,7 @@ const Footer: React.FC = () => {
             <div className="space-y-4 text-gray-400">
               <div className="flex items-start space-x-3">
                 <Mail size={20} className="flex-shrink-0 mt-1" />
-                <span>decodex@ieeesps.org</span>
+                <span>core.team@decodex.one</span>
               </div>
               <a 
                 href="#contact" 
