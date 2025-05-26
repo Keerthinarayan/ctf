@@ -176,9 +176,9 @@ const HeroSection = () => {
           {/* Decode X - lifted higher on mobile */}
           <div className="flex items-center justify-center mb-6 md:mb-12 -mt-4 md:mt-0">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight flex items-center">
-              <Code2 className="w-10 h-10 md:w-12 md:h-12 mr-3 md:mr-4 animate-pulse" />
+              
               <span className="bg-gradient-to-r from-[#00629B] to-[#78BE20] bg-clip-text text-transparent">
-                Decode X
+                DecodeX
               </span>
             </h1>
           </div>
