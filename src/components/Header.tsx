@@ -69,12 +69,17 @@ const Header: React.FC = () => {
           <div className="flex items-center">
             <Link 
               to="/" 
-              className="flex items-center space-x-2 text-white group"
+              className="flex items-center space-x-2 text-white group ml-3"
             >
-              <span className={`text-white transition-opacity duration-500 ${showCodeBracket ? 'opacity-100' : 'opacity-30'}`}>&lt;/&gt;</span>
-              <span className="text-lg font-bold bg-gradient-to-r from-[#004B87] to-[#78BE20] bg-clip-text text-transparent ml-2">
-                DecodeX
-              </span>
+              <img
+                  src="https://i.imgur.com/mhfOnml.png"
+                  alt="X"
+                  className="w-12 h-12 md:w-16 md:h-16 lg:w-12 lg:h-12 object-contain"
+                  style={{ 
+                    filter: 'drop-shadow(0 0 8px rgba(120, 190, 32, 0.5))'
+                  }}
+                  loading="eager"
+                />
             </Link>
           </div>
 
