@@ -53,7 +53,7 @@ const RegistrationPage: React.FC = () => {
                     registrationType === 'ctf' ? 'ring-2 ring-[#78BE20]' : ''
                   }`}
                 >
-                  Capture The Signal (CTF) Registration
+                  Capture The Signal (CTS) Registration
                 </button>
                 <button
                   onClick={() => handleSelection('industrial')}
