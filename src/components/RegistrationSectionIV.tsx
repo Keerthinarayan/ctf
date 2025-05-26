@@ -262,15 +262,27 @@ const RegistrationSectionIV: React.FC = () => {
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
               <h3 className="text-xl font-semibold text-white mb-4">IEEE SPS Membership</h3>
               <div className="space-y-6">
-                <select
-                  value={membershipStatus}
-                  onChange={(e) => setMembershipStatus(e.target.value)}
-                  required
-                  className="w-full px-4 py-2 bg-slate-900/50 border border-[#78BE20]/30 rounded-lg focus:ring-2 focus:ring-[#78BE20] focus:border-transparent text-gray-300"
-                >
-                  <option value="Non-SPS">Non-SPS Member</option>
-                  <option value="SPS">SPS Member</option>
-                </select>
+                {/* Dropdown */}
+                <div className="relative">
+                  <select
+                    value={membershipStatus}
+                    onChange={(e) => setMembershipStatus(e.target.value)}
+                    required
+                    className="w-full px-4 py-3 pr-12 bg-slate-900/50 border border-[#78BE20]/30 rounded-lg text-gray-300 appearance-none focus:ring-2 focus:ring-[#78BE20] focus:border-[#78BE20]/50 hover:border-[#78BE20]/50 transition-colors "
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2378BE20' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'right 0.75rem center',
+                      backgroundSize: '1.25rem 1.25rem'
+                    }}
+                  >
+                    <option value="Non-SPS" className="bg-slate-900 text-gray-300">Non-SPS Member</option>
+                    <option value="SPS" className="bg-slate-900 text-gray-300">SPS Member</option>
+                  </select>
+                  
+                </div>
+
+                {/* Conditional input */}
                 {membershipStatus === 'SPS' && (
                   <div className="relative">
                     <input
@@ -279,25 +291,34 @@ const RegistrationSectionIV: React.FC = () => {
                       onChange={(e) => handleMembershipIdChange(e.target.value)}
                       required
                       maxLength={8}
-                      className={`w-full px-4 py-2 bg-slate-900/50 border ${
+                      className={`w-full px-4 py-3 bg-slate-900/50 border ${
                         membershipIdError ? 'border-red-500' : 'border-[#78BE20]/30'
-                      } rounded-lg focus:ring-2 focus:ring-[#78BE20] focus:border-transparent text-gray-300`}
+                      } rounded-lg text-gray-300 focus:ring-2 focus:ring-[#78BE20] focus:border-[#78BE20]/50`}
                       placeholder="Enter 8-digit SPS membership ID"
                     />
-                    {membershipIdError && <p className="text-red-500 text-xs mt-1">{membershipIdError}</p>}
+                    {membershipIdError && (
+                      <p className="text-red-500 text-xs mt-1">{membershipIdError}</p>
+                    )}
                     <p className="text-yellow-400 text-sm mt-2">
                       Note: Your SPS membership ID will be verified from our database
                     </p>
                   </div>
                 )}
+
+                {/* Fee box */}
                 <div className="p-4 bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 rounded-xl border border-[#78BE20]/30">
-                  <p className="text-lg font-semibold text-white">Registration Fee: ₹{getFee()}</p>
+                  <p className="text-lg font-semibold text-white">
+                    Registration Fee: ₹{getFee()}
+                  </p>
                   <p className="text-sm text-gray-400 mt-1">
-                    {membershipStatus === 'SPS' ? 'Free for SPS members' : 'Registration fee for non-SPS members'}
+                    {membershipStatus === 'SPS'
+                      ? 'Free for SPS members'
+                      : 'Registration fee for non-SPS members'}
                   </p>
                 </div>
               </div>
             </div>
+
 
             {/* Payment Section - Only shown for Non-SPS members */}
             {membershipStatus === 'Non-SPS' && (

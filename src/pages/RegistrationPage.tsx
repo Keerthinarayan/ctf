@@ -41,10 +41,10 @@ const RegistrationPage: React.FC = () => {
       </section>
 
       {/* Selection Form Section */}
-      <section className="pb-6 bg-gradient-to-b from-[#004B87]/20 to-slate-900">
+      <section className="pb-6 bg-gradient-to-b from-[#004B87]/20 to-slate-900 ">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
+            <div className="mb-12 bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
               <h2 className="text-3xl font-bold text-center mb-6 text-white">Select Registration Type</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <button
