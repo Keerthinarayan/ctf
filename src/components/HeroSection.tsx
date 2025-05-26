@@ -174,13 +174,32 @@ const HeroSection = () => {
           </div>
           
           {/* Decode X - lifted higher on mobile */}
-          <div className="flex items-center justify-center mb-6 md:mb-12 -mt-4 md:mt-0">
+          <div className="flex items-center justify-center mb-6 md:mb-12md:mt-0">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight flex items-center">
-              <Code2 className="w-10 h-10 md:w-12 md:h-12 mr-3 md:mr-4 animate-pulse" />
+             
               <span className="bg-gradient-to-r from-[#00629B] to-[#78BE20] bg-clip-text text-transparent">
-                Decode X
-              </span>
+                Decode
+              </span>              <div className="flex items-center justify-center">
+                {/* <img
+                  src="https://i.imgur.com/XFN9u73.png"
+                  alt="X"
+                  className="w-12 h-12 md:w-16 md:h-16 lg:w-24 lg:h-24 object-contain flex-shrink-0 -ml-3 mt-4"
+                  style={{ 
+                    filter: 'drop-shadow(0 0 8px rgba(120, 190, 32, 0.4))'
+                  }}
+                  loading="eager"
+                /> */}
+              </div>
             </h1>
+             <img
+                  src="https://i.imgur.com/mhfOnml.png"
+                  alt="X"
+                  className="w-12 h-12 md:w-16 md:h-16 lg:w-28 lg:h-28 object-contain flex-shrink-0 -ml-3 mt-2"
+                  style={{ 
+                    filter: 'drop-shadow(0 0 8px rgba(120, 190, 32, 0.4))'
+                  }}
+                  loading="eager"
+                />
           </div>
           
           <animated.div style={props} className="flex flex-wrap justify-center gap-3 mb-6 md:mb-8 max-w-2xl">
