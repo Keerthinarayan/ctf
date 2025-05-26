@@ -8,64 +8,41 @@ const CTFPage: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const categories = [
-    {
-      icon: <Terminal className="h-6 w-6" />,
-      title: "Web Exploitation",
-      description: "Test your skills in finding and exploiting web vulnerabilities, including SQL injection, XSS, and CSRF attacks."
-    },
-    {
-      icon: <Shield className="h-6 w-6" />,
-      title: "Cryptography",
-      description: "Crack codes, decipher messages, and solve cryptographic challenges using various encryption techniques."
-    },
-    {
-      icon: <Brain className="h-6 w-6" />,
-      title: "Reverse Engineering",
-      description: "Analyze and understand compiled programs to find hidden flags and vulnerabilities."
-    },
-    {
-      icon: <Flag className="h-6 w-6" />,
-      title: "Binary Exploitation",
-      description: "Exploit binary vulnerabilities in programs to gain unauthorized access and capture flags."
-    }
-  ];
-
   const rounds = [
     {
-      title: "Round 1: Qualification",
+      title: "ROUND 1: PUZZLE RUSH",
       date: "June 13, 2025",
       time: "10:00 AM - 4:00 PM",
-      description: "Teams solve basic challenges across all categories to qualify for the main event. Top 20 teams advance.",
+      description: "Think fast. Solve faster. The game kicks off with a wild set of mind-melting puzzles a leaderboard based battle where every correct answer counts. Only the sharpest teams make it through",
       points: [
-        "Basic challenges in all categories",
-        "Focus on fundamental concepts",
-        "Individual team participation",
-        "Real-time scoreboard updates"
+        "⚡ Rapid-fire logic and puzzle challenges",
+        "🧠 Focused on analytical thinking",
+        "📈 leaderboard based elimination",
+        "🔥 Only the top 50% move on"
       ]
     },
     {
-      title: "Round 2: Advanced Challenges",
+      title: " ROUND 2: THE ALL-NIGHTER",
       date: "June 13 - June 14, 2025",
       time: "5:00 PM - 7:00 AM",
-      description: "Qualified teams tackle more complex challenges with increased difficulty and point values.",
+      description: "It’s midnight madness – where things get serious. This all-nighter throws challenging puzzles, conceptual problems, and a sprinkle of microcontroller-based logic games into the mix. Teamwork? Essential. Sleep? Optional.",
       points: [
-        "Advanced challenge sets",
-        "Higher point values",
-        "Team collaboration essential",
-        "Dynamic flag deployment"
+        "🔥 Higher-difficulty problems",
+        "🧩 Mixed with microcontroller-based logics",
+        "🎯 leaderboard based elimination",
+        "✅ Only 16 teams survive to the final showdown"
       ]
     },
     {
-      title: "Round 3: Final Sprint",
+      title: "ROUND 3: THE FINAL STANDOFF ",
       date: "June 14, 2025",
       time: "8:00 AM - 12:00 PM",
-      description: "The ultimate test with the most challenging problems and highest point values.",
+      description: "It’s bracket time.The top 16 clash in an intense head-to-head format. One-on-one matchups. Win or get eliminated. Only the smartest and fastest teams climb to the top.",
       points: [
-        "Expert-level challenges",
-        "Maximum point values",
-        "Special bonus flags",
-        "Final rankings determined"
+        "⚔️ 1v1 bracket duels – lose and you're out",
+        "👀 No prior hardware knowledge required – just GPT-powered reasoning",
+        "🏆 Top 3 emerge victorious",
+        "🎖️ Glory, bragging rights, and ultimate CTS domination"
       ]
     }
   ];
@@ -102,25 +79,6 @@ const CTFPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Categories Section - reduced top padding from py-20 to py-12 */}
-      <section className="py-12 bg-gradient-to-b from-[#004B87]/20 to-slate-900">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            <span className="bg-gradient-to-r from-[#004B87] to-[#78BE20] bg-clip-text text-transparent">
-              Challenge Categories
-            </span>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {categories.map((category, index) => (
-              <div key={index} className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
-                <div className="text-[#78BE20] mb-4">{category.icon}</div>
-                <h3 className="text-xl font-semibold text-white mb-3">{category.title}</h3>
-                <p className="text-gray-400">{category.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Competition Rounds */}
       <section className="py-20 bg-gradient-to-b from-slate-900 to-[#004B87]/20">
