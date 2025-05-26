@@ -78,12 +78,7 @@ const Footer: React.FC = () => {
                 <Mail size={20} className="flex-shrink-0 mt-1" />
                 <span>core.team@decodex.one</span>
               </div>
-              <a 
-                href="#contact" 
-                className="inline-block px-5 py-2 bg-gradient-to-r from-[#004B87] to-[#78BE20] text-white rounded-full hover:from-[#003a69] hover:to-[#62991a] transition-all shadow-md hover:shadow-[#004B87]/20 mt-2"
-              >
-                Get in Touch
-              </a>
+             
             </div>
           </div>
         </div>
