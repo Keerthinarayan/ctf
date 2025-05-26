@@ -68,19 +68,19 @@ const PrizeSection: React.FC = () => {
           <h3 className="text-xl font-bold text-white mb-4 text-center">Additional Prizes</h3>
           <div className="grid md:grid-cols-3 gap-4">
             <div className="p-4 bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 rounded-lg border border-[#78BE20]/30">
-              <div className="font-semibold text-[#78BE20] mb-1">Best Innovation Award</div>
-              <div className="text-gray-300">₹5,000 + Innovation Certificate</div>
+              <div className="font-semibold text-[#78BE20] mb-1">4th Place ( Consolation Award ) </div>
+              <div className="text-gray-300">₹5,000 </div>
             </div>
             <div className="p-4 bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 rounded-lg border border-[#78BE20]/30">
-              <div className="font-semibold text-[#78BE20] mb-1">Best Design Award</div>
-              <div className="text-gray-300">₹5,000 + Design Excellence Certificate</div>
+              <div className="font-semibold text-[#78BE20] mb-1">5th Place ( Consolation Award )</div>
+              <div className="text-gray-300">₹5,000 </div>
             </div>
             <div className="p-4 bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 rounded-lg border border-[#78BE20]/30">
               <div className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-[#78BE20]" />
-                <div className="font-semibold text-[#78BE20]">Special Mention</div>
+                <div className="font-semibold text-[#78BE20]">IEEE Society Challange Award</div>
               </div>
-              <div className="text-gray-300">₹5,000 + Recognition Certificate</div>
+              <div className="text-gray-300"> ₹5,000</div>
             </div>
           </div>
         </div>
