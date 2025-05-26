@@ -175,12 +175,15 @@ const HeroSection = () => {
           
           {/* Decode X - lifted higher on mobile */}
           <div className="flex items-center justify-center mb-6 md:mb-12 -mt-4 md:mt-0">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight flex items-center">
-              
-              <span className="bg-gradient-to-r from-[#00629B] to-[#78BE20] bg-clip-text text-transparent">
-                DecodeX
-              </span>
-            </h1>
+            <img   
+                  src="https://i.imgur.com/dVciStJ.png"
+                  alt="X"
+                  className="w-[280px] md:w-[320px] lg:w-[450px] h-auto object-contain md:-mb-8 md:-mt-10"
+                  style={{ 
+                    filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.6))'
+                  }}
+                  loading="eager"
+            />
           </div>
           
           <animated.div style={props} className="flex flex-wrap justify-center gap-3 mb-6 md:mb-8 max-w-2xl">
