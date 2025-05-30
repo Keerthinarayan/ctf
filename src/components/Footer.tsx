@@ -9,10 +9,18 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-1">
             <Link to="/" className="flex items-center space-x-2 mb-4">
-              <Code2 className="h-8 w-8 text-[#78BE20]" />
-              <span className="text-xl font-bold bg-gradient-to-r from-[#004B87] to-[#78BE20] bg-clip-text text-transparent">
-                DecodeX
-              </span>
+              
+              <div className="flex items-center justify-center mb-6 md:mb-12 -mt-4 md:mt-0">
+            <img   
+                  src="https://i.imgur.com/dVciStJ.png"
+                  alt="X"
+                  className="w-[150px] md:w-[200px] lg:w-[200px] h-auto object-contain -mb-8 md:-mb-12 "
+                  style={{ 
+                    filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.6))'
+                  }}
+                  loading="eager"
+            />
+          </div>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
               The 24-hour flagship event by IEEE SPS, challenging participants to decode, develop, and innovate.
@@ -53,19 +61,19 @@ const Footer: React.FC = () => {
             </ul>
           </div>
           
-          <div className="col-span-1">
+          <div className="col-span-1 md:-ml-12 lg:-ml-12 ">
             <h3 className="text-lg font-semibold mb-4">Important Dates</h3>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-3 text-gray-400">
               <li className="flex items-center">
-                <span className="w-24">June 12, 2025</span>
+                <span className="w-36">June 12, 2025</span>
                 <span>Industrial Visit</span>
               </li>
               <li className="flex items-center">
-                <span className="w-24">June 13-14, 2025</span>
+                <span className="w-36">June 13-14, 2025</span>
                 <span>CTS Event</span>
               </li>
               <li className="flex items-center">
-                <span className="w-24">June 14, 2025</span>
+                <span className="w-36">June 14, 2025</span>
                 <span>Prize Distribution</span>
               </li>
             </ul>
@@ -77,7 +85,18 @@ const Footer: React.FC = () => {
               <div className="flex items-start space-x-3">
                 <Mail size={20} className="flex-shrink-0 mt-1" />
                 <span>core.team@decodex.one</span>
+                
               </div>
+               <ul className="space-y-1.5 text-gray-400">
+              <li className="flex items-center">
+                <span className="w-20">Smriti</span>
+                <span>: +91 7389296975</span>
+              </li>
+              <li className="flex items-center">
+                <span className="w-20">Chinmay</span>
+                <span>: +91 8618978745</span>
+              </li>
+            </ul>
              
             </div>
           </div>
