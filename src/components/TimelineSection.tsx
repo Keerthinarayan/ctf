@@ -41,7 +41,7 @@ const TimelineSection: React.FC = () => {
       title: "Industrial Visit",
       description: "Enjoy a unique opportunity to explore the workings of a leading tech company and engage with experts. Company details coming soon!",
       icon: <MapPin className="h-6 w-6" />,
-      location: "TBD",
+      location: "Centre for Brain Research, IISC Bangalore",
       buttons: [
         {
           text: "Know More",
@@ -58,7 +58,7 @@ const TimelineSection: React.FC = () => {
     {
       date: "June 13 - 14, 2025",
       time: "10:00 AM - 10:00 AM",
-      title: "CAPTURE THE SIGNAL",
+      title: "CAPTURE THE SIGNAL 2.0",
       description: "Gear up for a 24-hour overnight showdown of innovative puzzles, fierce battles, and nonstop eliminations. Only the sharpest survive!",
       icon: <Calendar className="h-6 w-6" />,
       location: "APJ Abdul Kalam LAB, BMSIT&M",
@@ -81,7 +81,7 @@ const TimelineSection: React.FC = () => {
       title: "Finale and Prize Distribution",
       description: "Join us for the exciting finale as we announce the showdown champions and hand out the prizes, and recognition awards",
       icon: <Award className="h-6 w-6" />,
-      location: "BSN Auditorium,BMSIT"
+      location: "BSN Auditorium, BMSIT"
     }
   ];
 
