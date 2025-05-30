@@ -6,7 +6,6 @@ import RegistrationPage from './pages/RegistrationPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
-import { AboutEventPage } from './pages/AboutEventPage';
 import IndustrialVisitPage from './pages/IndustrialVisitPage';
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/ctf" element={<CTFPage />} />
             <Route path="/register" element={<RegistrationPage />} />
-            <Route path="/aboutevent" element={<AboutEventPage />} />
             <Route path="/industrial-visit" element={<IndustrialVisitPage />} />
           </Routes>
         </main>
