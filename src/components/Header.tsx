@@ -98,7 +98,7 @@ const Header: React.FC = () => {
                 location.pathname === '/ctf' ? 'text-[#78BE20]' : 'text-gray-200'
               }`}
             >
-              CTF
+              CTS
             </Link>
             <Link
               to="/industrial-visit"
