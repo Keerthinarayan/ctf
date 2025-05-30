@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Phone, Mail, GraduationCap, School, CreditCard } from 'lucide-react';
+import { User, Phone, Mail, GraduationCap, School, CreditCard, Building2 } from 'lucide-react';
 import { supabaseClient } from '../services/supabaseClient';
 import RegistrationPopup from './RegistrationPopup';
 
@@ -10,6 +10,7 @@ const RegistrationSectionIV: React.FC = () => {
   const [phoneError, setPhoneError] = useState('');
   const [semester, setSemester] = useState('');
   const [branch, setBranch] = useState('');
+  const [collegeName, setCollegeName] = useState('');
   const [membershipStatus, setMembershipStatus] = useState('Non-SPS');
   const [membershipId, setMembershipId] = useState('');
   const [membershipIdError, setMembershipIdError] = useState('');
@@ -81,10 +82,19 @@ const RegistrationSectionIV: React.FC = () => {
       setSubmitStatus({ type: 'error', message: 'Semester must be between 1 and 8.' });
       return false;
     }
-    
-    // Branch: max 30 characters
+      // Branch: max 30 characters
     if (branch.length > 30) {
       setSubmitStatus({ type: 'error', message: 'Branch must not exceed 30 characters.' });
+      return false;
+    }
+
+    // College Name: required and max 100 characters
+    if (collegeName.trim() === '') {
+      setSubmitStatus({ type: 'error', message: 'College name is required.' });
+      return false;
+    }
+    if (collegeName.length > 100) {
+      setSubmitStatus({ type: 'error', message: 'College name must not exceed 100 characters.' });
       return false;
     }
     
@@ -119,14 +129,13 @@ const RegistrationSectionIV: React.FC = () => {
     }
 
     setIsSubmitting(true);
-    setSubmitStatus(null);
-
-    const data = {
+    setSubmitStatus(null);    const data = {
       name,
       email,
       phone_number: phone,
       semester: parseInt(semester, 10),
       branch,
+      college_name: collegeName,
       membership_type: membershipStatus,
       membership_id: membershipStatus === 'SPS' ? membershipId : null,
       utr_number: membershipStatus === 'Non-SPS' ? utrNumber : null,
@@ -143,11 +152,11 @@ const RegistrationSectionIV: React.FC = () => {
       setIsPopupOpen(true);
 
       // Reset form
-      setName('');
-      setEmail('');
+      setName('');      setEmail('');
       setPhone('');
       setSemester('');
       setBranch('');
+      setCollegeName('');
       setMembershipStatus('Non-SPS');
       setMembershipId('');
       setUtrNumber('');
@@ -228,8 +237,18 @@ const RegistrationSectionIV: React.FC = () => {
 
             {/* Academic Details Section */}
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
-              <h3 className="text-xl font-semibold text-white mb-4">Academic Details</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <h3 className="text-xl font-semibold text-white mb-4">Academic Details</h3>              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="relative">
+                  <Building2 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#78BE20] h-5 w-5" />
+                  <input
+                    type="text"
+                    value={collegeName}
+                    onChange={(e) => setCollegeName(e.target.value)}
+                    required
+                    className="w-full pl-10 pr-4 py-2 bg-slate-900/50 border border-[#78BE20]/30 rounded-lg focus:ring-2 focus:ring-[#78BE20] focus:border-transparent text-gray-300"
+                    placeholder="Enter college name"
+                  />
+                </div>
                 <div className="relative">
                   <GraduationCap className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#78BE20] h-5 w-5" />
                   <input
