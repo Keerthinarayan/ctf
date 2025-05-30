@@ -168,6 +168,17 @@ const Header: React.FC = () => {
                 CTS
               </Link>
               <Link
+                to="/industrial-visit"
+                className={`text-lg font-medium py-2 px-4 rounded-lg transition-all duration-300 ${
+                  location.pathname === '/industrial-visit'
+                    ? 'bg-[#78BE20]/10 text-[#78BE20]'
+                    : 'text-gray-200 hover:bg-[#78BE20]/10'
+                }`}
+                onClick={toggleMenu}
+              >
+                Industrial Visit
+              </Link>
+              <Link
                 to="/register"
                 className="text-lg font-medium py-2 px-4 bg-gradient-to-r from-[#004B87] to-[#78BE20] text-white rounded-lg text-center hover:from-[#003a69] hover:to-[#62991a] transition-all"
                 onClick={toggleMenu}
