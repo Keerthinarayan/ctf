@@ -88,7 +88,7 @@ const TimelineSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-b from-slate-900 via-[#004B87]/20 to-slate-900">
+    <section className="py-12 bg-gradient-to-b from-slate-900 via-[#004B87]/20 to-slate-900">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">

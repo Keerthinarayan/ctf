@@ -33,7 +33,7 @@ const AboutSection: React.FC = () => {
   const IEEE_GREEN_DARK = '#62991a';
 
   return (
-    <section id="about" className="py-32 bg-gradient-to-b from-slate-900 via-[#004B87]/20 to-slate-900 section-transition">
+    <section id="about" className="pt-32 pb-12 bg-gradient-to-b from-slate-900 via-[#004B87]/20 to-slate-900 section-transition">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">

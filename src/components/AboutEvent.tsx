@@ -29,7 +29,7 @@ export const AboutEvent = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-b from-slate-900 to-[#004B87]/20 text-white">
+    <section id="about" className="pt-20 pb-8 bg-gradient-to-b from-slate-900 to-[#004B87]/20 text-white">
       <div className="container mx-auto px-4">
         {/* Heading */}
         <div className="text-center mb-12">
@@ -73,7 +73,7 @@ export const AboutEvent = () => {
         </div>
 
         {/* Timeline Style Flow */}
-        <div className="max-w-5xl mx-auto py-20">
+        <div className="max-w-5xl mx-auto pt-20 pb-12">
           <h3 className="text-3xl font-bold text-center mb-12">
             <span className="bg-gradient-to-r from-[#004B87] to-[#78BE20] bg-clip-text text-transparent">
               Visit Flow
@@ -100,7 +100,7 @@ export const AboutEvent = () => {
         </div>
 
         {/* Important Documents Section - Now after Visit Flow */}
-        <div className="container mx-auto px-4 pt-16 pb-20">
+        <div className="container mx-auto px-4 pt-8 pb-20">
           <h2 className="text-3xl font-bold text-center mb-12">
             <span className="bg-gradient-to-r from-[#004B87] to-[#78BE20] bg-clip-text text-transparent">
               Important Documents
@@ -134,7 +134,7 @@ export const AboutEvent = () => {
         </div>
 
         {/* Who Should Attend */}
-        <div className="max-w-4xl mx-auto text-center py-12">
+        <div className="max-w-4xl mx-auto text-center py-2">
           <h3 className="text-3xl font-bold mb-4 text-white">👥 Ideal For</h3>
           <p className="text-gray-400">
             Engineering students from all disciplines - Computer Science, Electronics, Biomedical, Mechanical - interested in the intersection of technology and brain research.
