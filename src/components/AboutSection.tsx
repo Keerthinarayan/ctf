@@ -57,9 +57,9 @@ const AboutSection: React.FC = () => {
                 DecodeX is an All-Out, 3 day Comprehensive Signal Processing experience who love a good brain burn.
               </p>
               <ul className="list-disc list-inside text-gray-300 space-y-2 ml-4">
-                <li><strong>Day 1:</strong> Industrial Visit to leading tech companies(TBD)</li>
-                <li><strong>Day 2 - 3: </strong> Dive into Capture the Signal, an overnight tech challenge</li>
-                <li>Three rounds combining puzzles, signal analysis, ML, and hardware.</li>
+                <li><strong>Day 1:</strong> Industrial Visit: Centre for Brain Research - IISc</li>
+                <li><strong>Day 2 - 3: </strong> Dive into Capture the Signal, an overnight tech challenge with 3 Rounds</li>
+                 <li>Use your signal processing skills to analyze, interpret, and decode hidden data from complex signals.</li>
                 <li>Connect with experts from Industry, Academia, and Alumni.</li>
               </ul>
             </div>
