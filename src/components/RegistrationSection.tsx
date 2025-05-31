@@ -42,8 +42,8 @@ const RegistrationSection: React.FC = () => {
   const handleMembershipIdChange = (value: string) => {
     const digitsOnly = value.replace(/\D/g, '');
     setMembershipId(digitsOnly);
-    if (digitsOnly.length > 0 && digitsOnly.length !== 8) {
-      setMembershipIdError('IEEE Membership ID must be exactly 8 digits');
+    if (digitsOnly.length > 0 && digitsOnly.length !== 9) {
+      setMembershipIdError('IEEE Membership ID must be exactly 9 digits');
     } else {
       setMembershipIdError('');
     }
@@ -97,7 +97,7 @@ const RegistrationSection: React.FC = () => {
       collegeName.trim() !== '' &&
       utrNumber.length === 12 &&
       members.every(member => member.name.trim() !== '') &&
-      (membershipStatus === 'Non-IEEE' || (membershipId.trim() !== '' && membershipId.length === 8)) &&
+      (membershipStatus === 'Non-IEEE' || (membershipId.trim() !== '' && membershipId.length === 9)) &&
       termsAccepted
     );
   };
@@ -356,11 +356,11 @@ const RegistrationSection: React.FC = () => {
                       value={membershipId}
                       onChange={(e) => handleMembershipIdChange(e.target.value)}
                       required
-                      maxLength={8}
+                      maxLength={9}
                       className={`w-full px-4 py-3 bg-slate-900/50 border ${
                         membershipIdError ? 'border-red-500' : 'border-[#78BE20]/30'
                       } rounded-lg text-gray-300 focus:ring-2 focus:ring-[#78BE20] focus:border-[#78BE20]/50`}
-                      placeholder="Enter 8-digit membership ID"
+                      placeholder="Enter 9-digit membership ID"
                     />
                     {membershipIdError && (
                       <p className="text-red-500 text-xs mt-1">{membershipIdError}</p>
