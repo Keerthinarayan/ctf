@@ -382,33 +382,39 @@ const RegistrationSection: React.FC = () => {
 
             {/* Payment Section */}
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
-              <h3 className="text-xl font-semibold text-white mb-4">Payment Details</h3>
-              <div className="space-y-6">
-                <div className="flex justify-center">
-                  <div className="w-64 h-64 bg-slate-900/50 rounded-xl border border-[#78BE20]/30 flex items-center justify-center">
-                    <img
-                      src="https://i.imgur.com/QR-Code.png"
-                      alt="Google Pay QR Code"
-                      className="max-w-full max-h-full p-4"
-                    />
-                  </div>
-                </div>
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={utrNumber}
-                    onChange={(e) => handleUtrChange(e.target.value)}
-                    required
-                    maxLength={12}
-                    className={`w-full px-4 py-2 bg-slate-900/50 border ${
-                      utrError ? 'border-red-500' : 'border-[#78BE20]/30'
-                    } rounded-lg focus:ring-2 focus:ring-[#78BE20] focus:border-transparent text-gray-300`}
-                    placeholder="Enter 12-character UTR number"
+            <h3 className="text-xl font-semibold text-white mb-4">Payment Details</h3>
+            <div className="space-y-6">
+              <div className="flex flex-col items-center space-y-4">
+                <div className="bg-slate-900/50 rounded-xl border border-[#78BE20]/30 p-2 shadow-md">
+                  <img
+                    src="https://i.imgur.com/O7zag8H.jpeg"
+                    alt="Google Pay QR Code"
+                    className="rounded-lg w-60 h-60 object-contain"
                   />
-                  {utrError && <p className="text-red-500 text-xs mt-1">{utrError}</p>}
                 </div>
+                <p className="text-white text-sm text-center">
+                  UPI ID: <span className="text-[#78BE20] font-medium">chinmaybhat1904-1@oksbi</span>
+                </p>
+              </div>
+
+
+              <div className="relative">
+                <input
+                  type="text"
+                  value={utrNumber}
+                  onChange={(e) => handleUtrChange(e.target.value)}
+                  required
+                  maxLength={12}
+                  className={`w-full px-4 py-2 bg-slate-900/50 border ${
+                    utrError ? 'border-red-500' : 'border-[#78BE20]/30'
+                  } rounded-lg focus:ring-2 focus:ring-[#78BE20] focus:border-transparent text-gray-300`}
+                  placeholder="Enter 12-character UTR number"
+                />
+                {utrError && <p className="text-red-500 text-xs mt-1">{utrError}</p>}
               </div>
             </div>
+          </div>
+
 
             {/* Submission Status */}
             {submitStatus && (

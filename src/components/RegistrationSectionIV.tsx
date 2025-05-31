@@ -340,19 +340,22 @@ const RegistrationSectionIV: React.FC = () => {
 
 
             {/* Payment Section - Only shown for Non-SPS members */}
+            {/* Payment Section - Only shown for Non-SPS members */}
             {membershipStatus === 'Non-SPS' && (
               <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
                 <h3 className="text-xl font-semibold text-white mb-4">Payment Details</h3>
                 <div className="space-y-6">
-                  <div className="flex justify-center">
-                    <div className="w-64 h-64 bg-slate-900/50 rounded-xl border border-[#78BE20]/30 flex items-center justify-center">
+                  <div className="flex flex-col items-center space-y-4">
+                    <div className="w-64 h-68 p-2 bg-slate-900/50 rounded-xl border border-[#78BE20]/30 flex items-center justify-center">
                       <img
-                        src="https://i.imgur.com/QR-Code.png"
+                        src="https://i.imgur.com/O7zag8H.jpeg"
                         alt="Google Pay QR Code"
-                        className="max-w-full max-h-full p-4"
-                      />
+                        className="rounded-lg w-60 h-60 object-contain"
+                      />  
                     </div>
+                    <p className="text-white text-sm">UPI ID: <span className="text-[#78BE20]">chinmaybhat1904-1@oksbi</span></p>
                   </div>
+
                   <div className="relative">
                     <CreditCard className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#78BE20] h-5 w-5" />
                     <input
@@ -371,6 +374,7 @@ const RegistrationSectionIV: React.FC = () => {
                 </div>
               </div>
             )}
+
 
             {/* Submit Button */}
             <div className="flex justify-center">
