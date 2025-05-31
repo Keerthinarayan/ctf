@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const PrizeSection: React.FC = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-[#004B87]/20 to-slate-900">
+    <section className="pb-16 bg-gradient-to-b from-[#004B87]/20 to-slate-900">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
@@ -77,7 +77,7 @@ const PrizeSection: React.FC = () => {
 
 
         {/* CTA Section */}
-        <div className="mt-20 text-center">
+        <div className="mt-12 text-center">
           <h2 className="text-3xl font-bold mb-8 text-white">Ready to Accept the Challenge?</h2>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link

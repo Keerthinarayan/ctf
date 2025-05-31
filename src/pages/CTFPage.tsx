@@ -149,8 +149,12 @@ const CTFPage: React.FC = () => {
       Important Documents
     </span>
   </h2>
+  {/* Instructional Note */}
+  <p className="text-center text-sm text-gray-400 mb-6">
+    (Please select a document below to view or download it.)
+  </p>
   <div className="flex justify-center">
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl">      
       {documents.map((doc, index) => (
         <a
           key={index}
@@ -170,7 +174,10 @@ const CTFPage: React.FC = () => {
       ))}
     </div>
   </div>
+
+  
 </div>
+
       </section>
 
       {/* Prize Section */}
