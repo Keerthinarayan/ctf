@@ -39,13 +39,13 @@ const TimelineSection: React.FC = () => {
       date: "June 12, 2025",
       time: "9:00 AM - 5:00 PM",
       title: "Industrial Visit",
-      description: "Enjoy a unique opportunity to explore the workings of a leading tech company and engage with experts. Company details coming soon!",
+      description: "Enjoy a unique opportunity to explore the workings of a Center for Brain Research,IISc  engage with experts and reaserchers ",
       icon: <MapPin className="h-6 w-6" />,
       location: "Centre for Brain Research, IISC Bangalore",
       buttons: [
         {
           text: "Know More",
-          link: "/aboutevent",
+          link: "/industrial-visit",
           primary: false
         },
         {
