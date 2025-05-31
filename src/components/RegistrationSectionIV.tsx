@@ -48,8 +48,8 @@ const RegistrationSectionIV: React.FC = () => {
   const handleMembershipIdChange = (value: string) => {
     const digitsOnly = value.replace(/\D/g, '');
     setMembershipId(digitsOnly);
-    if (digitsOnly.length > 0 && digitsOnly.length !== 9) {
-      setMembershipIdError('IEEE SPS Membership ID must be exactly 9 digits');
+    if (digitsOnly.length > 0 && digitsOnly.length <= 9) {
+      setMembershipIdError('');
     } else {
       setMembershipIdError('');
     }
@@ -78,8 +78,9 @@ const RegistrationSectionIV: React.FC = () => {
     // College Name validation
     if (collegeName.trim() === '' || collegeName.length > 100) return false;
     
-    // Membership validation
-    if (membershipStatus === 'SPS' && membershipId.length !== 9) return false;
+    // Membership validation  
+    // Dont know reason for adding 7 as length but its working
+    if (membershipStatus === 'SPS' && membershipId.length <= 7) return false;
     if (membershipStatus === 'Non-SPS' && utrNumber.length !== 12) return false;
 
     // Terms acceptance
@@ -111,9 +112,9 @@ const RegistrationSectionIV: React.FC = () => {
     if (collegeName.length > 100) {
       return 'College name must not exceed 100 characters.';
     }
-    if (membershipStatus === 'SPS' && membershipId.length !== 9) {
-      return 'IEEE SPS Membership ID must be exactly 9 digits';
-    }
+    // if (membershipStatus === 'SPS' && membershipId.length <= 9) {
+    //   return 'IEEE SPS Membership ID must be 8-9 digits';
+    // }
     if (membershipStatus === 'Non-SPS' && utrNumber.length !== 12) {
       return 'UTR number must be exactly 12 characters';
     }
@@ -325,7 +326,7 @@ const RegistrationSectionIV: React.FC = () => {
                       className={`w-full px-4 py-3 bg-slate-900/50 border ${
                         membershipIdError ? 'border-red-500' : 'border-[#78BE20]/30'
                       } rounded-lg text-gray-300 focus:ring-2 focus:ring-[#78BE20] focus:border-[#78BE20]/50`}
-                      placeholder="Enter 9-digit SPS membership ID"
+                      placeholder="Enter SPS membership ID"
                     />
                     {membershipIdError && (
                       <p className="text-red-500 text-xs mt-1">{membershipIdError}</p>
