@@ -14,38 +14,38 @@ export const AboutEvent = () => {
           <h2 className="text-4xl md:text-5xl font-bold">
             Explore the{" "}
             <span className="bg-gradient-to-r from-[#004B87] to-[#78BE20] bg-clip-text text-transparent">
-              Industrial Visit
+              Center for Brain Research
             </span>
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-300">
-            An experiential journey to discover how ideas evolve into innovations in real tech environments.
+            An immersive journey into cutting-edge neuroscience research at IISc Bangalore, where the mysteries of the brain are unraveled.
           </p>
         </div>
 
         {/* Highlight Cards */}
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
-            <h3 className="text-xl font-semibold text-[#78BE20] mb-3">🔍 Inside the Tech World</h3>
+            <h3 className="text-xl font-semibold text-[#78BE20] mb-3">🧠 Neural Engineering Labs</h3>
             <p className="text-gray-400">
-              Get exclusive behind-the-scenes access to innovation labs, R&D centers, and startup incubators where real technology is born and tested.
+              Explore cutting-edge laboratories where brain-computer interfaces, neural prosthetics, and biomedical devices are engineered and tested.
             </p>
           </div>
           <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
-            <h3 className="text-xl font-semibold text-[#78BE20] mb-3">💼 Industry Interaction</h3>
+            <h3 className="text-xl font-semibold text-[#78BE20] mb-3">⚙️ Technology Integration</h3>
             <p className="text-gray-400">
-              Speak directly with developers, product managers, and team leads. Understand what it's really like to work in high-paced tech environments.
+              See how engineers collaborate with neuroscientists to build advanced imaging systems, signal processing algorithms, and computational models.
             </p>
           </div>
           <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
-            <h3 className="text-xl font-semibold text-[#78BE20] mb-3">🚀 Applied Learning</h3>
+            <h3 className="text-xl font-semibold text-[#78BE20] mb-3">💻 AI & Brain Computing</h3>
             <p className="text-gray-400">
-              Learn how technologies like AI, cloud, and DevOps are applied across industries, and how teams collaborate on real-world problem-solving.
+              Discover how machine learning, deep neural networks, and embedded systems are revolutionizing brain research and medical technology.
             </p>
           </div>
           <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
-            <h3 className="text-xl font-semibold text-[#78BE20] mb-3">🎯 The Bigger Picture</h3>
+            <h3 className="text-xl font-semibold text-[#78BE20] mb-3">🔧 Engineering Applications</h3>
             <p className="text-gray-400">
-              Discover how businesses make tech-driven decisions, manage agile workflows, and scale operations globally from India’s top tech parks.
+              Learn about career opportunities in biomedical engineering, neuroengineering, and how technical skills apply to healthcare innovation.
             </p>
           </div>
         </div>
@@ -59,20 +59,20 @@ export const AboutEvent = () => {
           </h3>
           <div className="space-y-8">
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
-              <h4 className="text-xl font-semibold text-white mb-2">1. Welcome & Briefing</h4>
-              <p className="text-gray-400">Kick off with a company overview and breakdown of their core tech stack and mission.</p>
+              <h4 className="text-xl font-semibold text-white mb-2">1. Welcome & Introduction</h4>
+              <p className="text-gray-400">Introduction to the Center for Brain Research, its mission, and current breakthrough research projects.</p>
             </div>
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
-              <h4 className="text-xl font-semibold text-white mb-2">2. Facility Tour</h4>
-              <p className="text-gray-400">Walkthrough of engineering departments, dev clusters, and live ops zones.</p>
+              <h4 className="text-xl font-semibold text-white mb-2">2. Engineering Labs Tour</h4>
+              <p className="text-gray-400">Walk through biomedical engineering labs, signal processing units, and brain-computer interface development facilities.</p>
             </div>
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
-              <h4 className="text-xl font-semibold text-white mb-2">3. Live Demos</h4>
-              <p className="text-gray-400">Watch how products are developed, deployed, and scaled — in real time.</p>
+              <h4 className="text-xl font-semibold text-white mb-2">3. Technology Demonstrations</h4>
+              <p className="text-gray-400">Live demos of neural signal acquisition systems, machine learning models for brain data, and medical device prototypes.</p>
             </div>
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
-              <h4 className="text-xl font-semibold text-white mb-2">4. Networking & Insights</h4>
-              <p className="text-gray-400">Engage in open Q&A, grab actionable career insights, and build industry connections.</p>
+              <h4 className="text-xl font-semibold text-white mb-2">4. Career & Technical Insights</h4>
+              <p className="text-gray-400">Engineering career pathways in biomedical tech, startup opportunities, and hands-on technical skills needed in neuroengineering.</p>
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@ export const AboutEvent = () => {
         <div className="max-w-4xl mx-auto text-center py-12">
           <h3 className="text-3xl font-bold mb-4 text-white">👥 Ideal For</h3>
           <p className="text-gray-400">
-            Engineering students, early-stage innovators, or anyone curious about how today’s tech giants operate and create impact.
+            Engineering students from all disciplines - Computer Science, Electronics, Biomedical, Mechanical - interested in the intersection of technology and brain research.
           </p>
         </div>
 
