@@ -92,7 +92,7 @@ const IndustrialVisitPage: React.FC = () => {
                       <line x1="8" y1="2" x2="8" y2="6"></line>
                       <line x1="3" y1="10" x2="21" y2="10"></line>
                     </svg>
-                    12th June 2025 (subject to change)
+                    12th May, 2025 (subject to change)
                   </span>
                 </p>
               </div>
