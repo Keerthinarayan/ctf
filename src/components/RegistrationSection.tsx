@@ -26,6 +26,7 @@ const RegistrationSection: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const getFee = () => {
     switch (membershipStatus) {
@@ -96,7 +97,8 @@ const RegistrationSection: React.FC = () => {
       collegeName.trim() !== '' &&
       utrNumber.length === 12 &&
       members.every(member => member.name.trim() !== '') &&
-      (membershipStatus === 'Non-IEEE' || (membershipId.trim() !== '' && membershipId.length === 8))
+      (membershipStatus === 'Non-IEEE' || (membershipId.trim() !== '' && membershipId.length === 8)) &&
+      termsAccepted
     );
   };
 
@@ -322,7 +324,8 @@ const RegistrationSection: React.FC = () => {
               </div>
             </div>
 
-            {/* IEEE Membership Section */}            <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
+            {/* IEEE Membership Section */}
+            <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
               <h3 className="text-xl font-semibold text-white mb-4">IEEE Membership</h3>
               <div className="space-y-6">
                 {/* Dropdown */}
@@ -382,39 +385,62 @@ const RegistrationSection: React.FC = () => {
 
             {/* Payment Section */}
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
-            <h3 className="text-xl font-semibold text-white mb-4">Payment Details</h3>
-            <div className="space-y-6">
-              <div className="flex flex-col items-center space-y-4">
-                <div className="bg-slate-900/50 rounded-xl border border-[#78BE20]/30 p-2 shadow-md">
-                  <img
-                    src="https://i.imgur.com/O7zag8H.jpeg"
-                    alt="Google Pay QR Code"
-                    className="rounded-lg w-60 h-60 object-contain"
-                  />
+              <h3 className="text-xl font-semibold text-white mb-4">Payment Details</h3>
+              <div className="space-y-6">
+                <div className="flex flex-col items-center space-y-4">
+                  <div className="bg-slate-900/50 rounded-xl border border-[#78BE20]/30 p-2 shadow-md">
+                    <img
+                      src="https://i.imgur.com/O7zag8H.jpeg"
+                      alt="Google Pay QR Code"
+                      className="rounded-lg w-60 h-60 object-contain"
+                    />
+                  </div>
+                  <p className="text-white text-sm text-center">
+                    UPI ID: <span className="text-[#78BE20] font-medium">chinmaybhat1904-1@oksbi</span>
+                  </p>
                 </div>
-                <p className="text-white text-sm text-center">
-                  UPI ID: <span className="text-[#78BE20] font-medium">chinmaybhat1904-1@oksbi</span>
-                </p>
-              </div>
 
-
-              <div className="relative">
-                <input
-                  type="text"
-                  value={utrNumber}
-                  onChange={(e) => handleUtrChange(e.target.value)}
-                  required
-                  maxLength={12}
-                  className={`w-full px-4 py-2 bg-slate-900/50 border ${
-                    utrError ? 'border-red-500' : 'border-[#78BE20]/30'
-                  } rounded-lg focus:ring-2 focus:ring-[#78BE20] focus:border-transparent text-gray-300`}
-                  placeholder="Enter 12-character UTR number"
-                />
-                {utrError && <p className="text-red-500 text-xs mt-1">{utrError}</p>}
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={utrNumber}
+                    onChange={(e) => handleUtrChange(e.target.value)}
+                    required
+                    maxLength={12}
+                    className={`w-full px-4 py-2 bg-slate-900/50 border ${
+                      utrError ? 'border-red-500' : 'border-[#78BE20]/30'
+                    } rounded-lg focus:ring-2 focus:ring-[#78BE20] focus:border-transparent text-gray-300`}
+                    placeholder="Enter 12-character UTR number"
+                  />
+                  {utrError && <p className="text-red-500 text-xs mt-1">{utrError}</p>}
+                </div>
               </div>
             </div>
-          </div>
 
+            {/* Terms and Conditions Checkbox */}
+            <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
+              <div className="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  id="terms"
+                  checked={termsAccepted}
+                  onChange={(e) => setTermsAccepted(e.target.checked)}
+                  className="mt-1 h-4 w-4 rounded border-[#78BE20]/30 bg-slate-900/50 text-[#78BE20] focus:ring-[#78BE20] focus:ring-offset-0"
+                  required
+                />
+                <label htmlFor="terms" className="text-gray-300 text-sm">
+                  I have read all the documents and agree to the{' '}
+                  <a
+                    href="https://drive.google.com/file/d/1eBlJuojRuf2IF9W5BNuJ1ZTe_iwHfH03/view"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#78BE20] hover:text-[#62991a] underline"
+                  >
+                    terms and conditions
+                  </a>
+                </label>
+              </div>
+            </div>
 
             {/* Submission Status */}
             {submitStatus && (
