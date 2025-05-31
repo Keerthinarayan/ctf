@@ -19,6 +19,7 @@ const RegistrationSectionIV: React.FC = () => {
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const getFee = () => {
     return membershipStatus === 'SPS' ? 0 : 200;
@@ -55,81 +56,90 @@ const RegistrationSectionIV: React.FC = () => {
   };
 
   const validateForm = () => {
-    // Check for errors
+    // Check for existing validation errors
     if (phoneError || utrError || membershipIdError) return false;
     
-    // Name: max 30 characters
-    if (name.length > 30) {
-      setSubmitStatus({ type: 'error', message: 'Name must not exceed 30 characters.' });
-      return false;
-    }
+    // Name validation
+    if (name.length > 30) return false;
     
-    // Email: max 50 characters and contains '@'
-    if (email.length > 50 || !email.includes('@')) {
-      setSubmitStatus({ type: 'error', message: 'Email must be valid and not exceed 50 characters.' });
-      return false;
-    }
+    // Email validation
+    if (email.length > 50 || !email.includes('@')) return false;
     
-    // Phone: exactly 10 digits
-    if (phone.length !== 10) {
-      setPhoneError('Phone number must be exactly 10 digits');
-      return false;
-    }
+    // Phone validation
+    if (phone.length !== 10) return false;
     
-    // Semester: 1-8
+    // Semester validation
     const sem = parseInt(semester, 10);
-    if (isNaN(sem) || sem < 1 || sem > 8) {
-      setSubmitStatus({ type: 'error', message: 'Semester must be between 1 and 8.' });
-      return false;
-    }
-      // Branch: max 30 characters
-    if (branch.length > 30) {
-      setSubmitStatus({ type: 'error', message: 'Branch must not exceed 30 characters.' });
-      return false;
-    }
-
-    // College Name: required and max 100 characters
-    if (collegeName.trim() === '') {
-      setSubmitStatus({ type: 'error', message: 'College name is required.' });
-      return false;
-    }
-    if (collegeName.length > 100) {
-      setSubmitStatus({ type: 'error', message: 'College name must not exceed 100 characters.' });
-      return false;
-    }
+    if (isNaN(sem) || sem < 1 || sem > 8) return false;
     
-    // Membership constraints
-    if (membershipStatus === 'SPS') {
-      if (membershipId.length !== 8) {
-        setMembershipIdError('IEEE SPS Membership ID must be exactly 8 digits');
-        return false;
-      }
-    } else if (membershipStatus === 'Non-SPS') {
-      if (utrNumber.length !== 12) {
-        setUtrError('UTR number must be exactly 12 characters');
-        return false;
-      }
-    }
+    // Branch validation
+    if (branch.length > 30) return false;
+
+    // College Name validation
+    if (collegeName.trim() === '' || collegeName.length > 100) return false;
+    
+    // Membership validation
+    if (membershipStatus === 'SPS' && membershipId.length !== 8) return false;
+    if (membershipStatus === 'Non-SPS' && utrNumber.length !== 12) return false;
+
+    // Terms acceptance
+    if (!termsAccepted) return false;
     
     return true;
+  };
+
+  const getValidationError = () => {
+    if (name.length > 30) {
+      return 'Name must not exceed 30 characters.';
+    }
+    if (email.length > 50 || !email.includes('@')) {
+      return 'Email must be valid and not exceed 50 characters.';
+    }
+    if (phone.length !== 10) {
+      return 'Phone number must be exactly 10 digits';
+    }
+    const sem = parseInt(semester, 10);
+    if (isNaN(sem) || sem < 1 || sem > 8) {
+      return 'Semester must be between 1 and 8.';
+    }
+    if (branch.length > 30) {
+      return 'Branch must not exceed 30 characters.';
+    }
+    if (collegeName.trim() === '') {
+      return 'College name is required.';
+    }
+    if (collegeName.length > 100) {
+      return 'College name must not exceed 100 characters.';
+    }
+    if (membershipStatus === 'SPS' && membershipId.length !== 8) {
+      return 'IEEE SPS Membership ID must be exactly 8 digits';
+    }
+    if (membershipStatus === 'Non-SPS' && utrNumber.length !== 12) {
+      return 'UTR number must be exactly 12 characters';
+    }
+    if (!termsAccepted) {
+      return 'Please accept the terms and conditions.';
+    }
+    return null;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateForm()) {
-      if (!submitStatus) {
-        setSubmitStatus({ 
-          type: 'error', 
-          message: 'Please correct the errors in the form.' 
-        });
-        setIsPopupOpen(true);
-      }
+    const validationError = getValidationError();
+    if (validationError) {
+      setSubmitStatus({ 
+        type: 'error', 
+        message: validationError 
+      });
+      setIsPopupOpen(true);
       return;
     }
 
     setIsSubmitting(true);
-    setSubmitStatus(null);    const data = {
+    setSubmitStatus(null);
+
+    const data = {
       name,
       email,
       phone_number: phone,
@@ -152,7 +162,8 @@ const RegistrationSectionIV: React.FC = () => {
       setIsPopupOpen(true);
 
       // Reset form
-      setName('');      setEmail('');
+      setName('');
+      setEmail('');
       setPhone('');
       setSemester('');
       setBranch('');
@@ -160,6 +171,7 @@ const RegistrationSectionIV: React.FC = () => {
       setMembershipStatus('Non-SPS');
       setMembershipId('');
       setUtrNumber('');
+      setTermsAccepted(false);
     } catch (error) {
       console.error('Submission error:', error);
       setSubmitStatus({ 
@@ -237,7 +249,8 @@ const RegistrationSectionIV: React.FC = () => {
 
             {/* Academic Details Section */}
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
-              <h3 className="text-xl font-semibold text-white mb-4">Academic Details</h3>              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <h3 className="text-xl font-semibold text-white mb-4">Academic Details</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="relative">
                   <Building2 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#78BE20] h-5 w-5" />
                   <input
@@ -298,7 +311,6 @@ const RegistrationSectionIV: React.FC = () => {
                     <option value="Non-SPS" className="bg-slate-900 text-gray-300">Non-SPS Member</option>
                     <option value="SPS" className="bg-slate-900 text-gray-300">SPS Member</option>
                   </select>
-                  
                 </div>
 
                 {/* Conditional input */}
@@ -338,8 +350,6 @@ const RegistrationSectionIV: React.FC = () => {
               </div>
             </div>
 
-
-            {/* Payment Section - Only shown for Non-SPS members */}
             {/* Payment Section - Only shown for Non-SPS members */}
             {membershipStatus === 'Non-SPS' && (
               <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
@@ -375,12 +385,36 @@ const RegistrationSectionIV: React.FC = () => {
               </div>
             )}
 
+            {/* Terms and Conditions Checkbox */}
+            <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
+              <div className="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  id="terms-iv"
+                  checked={termsAccepted}
+                  onChange={(e) => setTermsAccepted(e.target.checked)}
+                  className="mt-1 h-4 w-4 rounded border-[#78BE20]/30 bg-slate-900/50 text-[#78BE20] focus:ring-[#78BE20] focus:ring-offset-0"
+                  required
+                />
+                <label htmlFor="terms-iv" className="text-gray-300 text-sm">
+                  I have read all the documents and agree to the{' '}
+                  <a
+                    href="https://drive.google.com/file/d/1eBlJuojRuf2IF9W5BNuJ1ZTe_iwHfH03/view"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#78BE20] hover:text-[#62991a] underline"
+                  >
+                    terms and conditions
+                  </a>
+                </label>
+              </div>
+            </div>
 
             {/* Submit Button */}
             <div className="flex justify-center">
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !validateForm()}
                 className={`px-8 py-3 bg-gradient-to-r from-[#004B87] to-[#78BE20] text-white rounded-full hover:from-[#003a69] hover:to-[#62991a] transition-all shadow-lg hover:shadow-[#004B87]/20 transform hover:scale-105 ${
                   isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
