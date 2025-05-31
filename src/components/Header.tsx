@@ -141,11 +141,8 @@ const Header: React.FC = () => {
         className="fixed top-0 left-0 h-full w-3/4 bg-slate-900 z-40 md:hidden"
       >
         <div className="flex flex-col p-6">
-          <div className="flex items-center mb-8">
-            <Code2 className="h-6 w-6 text-[#78BE20] mr-2" />
-            <span className="text-xl font-bold bg-gradient-to-r from-[#004B87] to-[#78BE20] bg-clip-text text-transparent">
-              DecodeX
-            </span>
+          <div className="flex items-center mb-16">
+            
           </div>
           
           <div className="flex flex-col space-y-4">
