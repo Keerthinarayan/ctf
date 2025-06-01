@@ -1,35 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { supabaseClient } from '../services/supabaseClient';
-import RegistrationPopup from './RegistrationPopup';
+// import { supabaseClient } from '../services/supabaseClient';
+// import RegistrationPopup from './RegistrationPopup';
 
 const RegistrationSectionIV: React.FC = () => {
-  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [registrationsClosed, setRegistrationsClosed] = useState(false);
+  // const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  // const [isPopupOpen, setIsPopupOpen] = useState(false);
+  // const [registrationsClosed, setRegistrationsClosed] = useState(false);
 
-  useEffect(() => {
-    checkRegistrationCount();
-  }, []);
+  // useEffect(() => {
+  //   checkRegistrationCount();
+  // }, []);
 
-  const checkRegistrationCount = async () => {
-    try {
-      const { count, error } = await supabaseClient
-        .from('visit_registrations')
-        .select('*', { count: 'exact' });
+  // const checkRegistrationCount = async () => {
+  //   try {
+  //     const { count, error } = await supabaseClient
+  //       .from('visit_registrations')
+  //       .select('*', { count: 'exact' });
 
-      if (error) throw error;
+  //     if (error) throw error;
       
-      if (count && count >= 15) {
-        setRegistrationsClosed(true);
-        setSubmitStatus({
-          type: 'error',
-          message: 'Registration is now closed as we have reached the maximum number of participants.'
-        });
-      }
-    } catch (error) {
-      console.error('Error checking registration count:', error);
-    }
-  };
+  //     if (count && count >= 15) {
+  //       setRegistrationsClosed(true);
+  //       setSubmitStatus({
+  //         type: 'error',
+  //         message: 'Registration is now closed as we have reached the maximum number of participants.'
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error('Error checking registration count:', error);
+  //   }
+  // };
 
   return (
     <section id="register-iv" className="py-20 bg-gradient-to-b from-slate-900 to-[#004B87]/20">
@@ -44,7 +44,7 @@ const RegistrationSectionIV: React.FC = () => {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          {registrationsClosed ? (
+          
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-8 border-2 border-red-500/30 shadow-xl text-center">
               <div className="mb-6">
                 <svg className="w-16 h-16 mx-auto text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -71,23 +71,8 @@ const RegistrationSectionIV: React.FC = () => {
                 <p className="mt-2 text-[#78BE20]">core.team@decodex.one | 91 8618978745</p>
               </div>
             </div>
-          ) : (
-            <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#78BE20] mx-auto mb-4"></div>
-              <p className="text-gray-300">Checking registration status...</p>
-            </div>
-          )}
         </div>
       </div>
-      
-      {submitStatus && isPopupOpen && (
-        <RegistrationPopup
-          type={submitStatus.type}
-          message={submitStatus.message}
-          isOpen={isPopupOpen}
-          onClose={() => setIsPopupOpen(false)}
-        />
-      )}
     </section>
   );
 };
