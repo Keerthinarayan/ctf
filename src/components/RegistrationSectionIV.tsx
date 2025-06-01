@@ -74,7 +74,7 @@ const RegistrationSectionIV: React.FC = () => {
 
               <div className="text-sm text-gray-400">
                 <p>For any queries, please contact:</p>
-                <p className="mt-2 text-[#78BE20]">events@sps.com | +91 9876543210</p>
+                <p className="mt-2 text-[#78BE20]">core.team@decodex.one | 91 8618978745</p>
               </div>
             </div>
           ) : (
