@@ -35,7 +35,7 @@ const RegistrationSectionIV: React.FC = () => {
     <section id="register-iv" className="py-20 bg-gradient-to-b from-slate-900 to-[#004B87]/20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Registration for{" "}
             <span className="bg-gradient-to-r from-[#004B87] to-[#78BE20] bg-clip-text text-transparent">
               Industrial Visit
@@ -56,20 +56,14 @@ const RegistrationSectionIV: React.FC = () => {
                 We've reached maximum capacity for the Industrial Visit. Thank you for your overwhelming response!
               </p>
               
-              <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 rounded-xl p-6 border border-[#78BE20]/30 mb-8">
+              <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 rounded-xl p-4 border border-[#78BE20]/30 mb-8">
                 <h4 className="text-xl font-semibold text-[#78BE20] mb-3">But wait!</h4>
                 <p className="text-gray-300 mb-4">
                   Registrations for <span className="font-bold text-white">Capture The Signal (CTS)</span> are still open!
                 </p>
                 <p className="text-sm text-gray-400 mb-4">
                   Don't miss this exciting technical event. Limited spots available!
-                </p>
-                <a
-                  href="#register-cts" // Replace with actual link to CTS registration
-                  className="inline-block px-6 py-3 bg-gradient-to-r from-[#004B87] to-[#78BE20] text-white rounded-full hover:from-[#003a69] hover:to-[#62991a] transition-all shadow-lg hover:shadow-[#004B87]/20 transform hover:scale-105"
-                >
-                  Register for CTS Now
-                </a>
+                </p>               
               </div>
 
               <div className="text-sm text-gray-400">
