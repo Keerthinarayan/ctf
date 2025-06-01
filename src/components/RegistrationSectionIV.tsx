@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { User, Phone, Mail, GraduationCap, School, CreditCard, Building2 } from 'lucide-react';
 import { supabaseClient } from '../services/supabaseClient';
 import RegistrationPopup from './RegistrationPopup';
@@ -20,6 +20,32 @@ const RegistrationSectionIV: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [registrationsClosed, setRegistrationsClosed] = useState(false);
+
+  useEffect(() => {
+    checkRegistrationCount();
+  }, []);
+
+  const checkRegistrationCount = async () => {
+    try {
+      const { count, error } = await supabaseClient
+        .from('visit_registrations')
+        .select('*', { count: 'exact' });
+
+      if (error) throw error;
+      
+      if (count && count >= 15) {
+        setRegistrationsClosed(true);
+        setSubmitStatus({
+          type: 'error',
+          message: 'Registration is now closed as we have reached the maximum number of participants.'
+        });
+        setIsPopupOpen(true);
+      }
+    } catch (error) {
+      console.error('Error checking registration count:', error);
+    }
+  };
 
   const getFee = () => {
     return membershipStatus === 'SPS' ? 0 : 200;
@@ -56,36 +82,17 @@ const RegistrationSectionIV: React.FC = () => {
   };
 
   const validateForm = () => {
-    // Check for existing validation errors
     if (phoneError || utrError || membershipIdError) return false;
-    
-    // Name validation
     if (name.length > 30) return false;
-    
-    // Email validation
     if (email.length > 50 || !email.includes('@')) return false;
-    
-    // Phone validation
     if (phone.length !== 10) return false;
-    
-    // Semester validation
     const sem = parseInt(semester, 10);
     if (isNaN(sem) || sem < 1 || sem > 8) return false;
-    
-    // Branch validation
     if (branch.length > 30) return false;
-
-    // College Name validation
     if (collegeName.trim() === '' || collegeName.length > 100) return false;
-    
-    // Membership validation  
-    // Dont know reason for adding 7 as length but its working
     if (membershipStatus === 'SPS' && membershipId.length <= 7) return false;
     if (membershipStatus === 'Non-SPS' && utrNumber.length !== 12) return false;
-
-    // Terms acceptance
     if (!termsAccepted) return false;
-    
     return true;
   };
 
@@ -112,9 +119,6 @@ const RegistrationSectionIV: React.FC = () => {
     if (collegeName.length > 100) {
       return 'College name must not exceed 100 characters.';
     }
-    // if (membershipStatus === 'SPS' && membershipId.length <= 9) {
-    //   return 'IEEE SPS Membership ID must be 8-9 digits';
-    // }
     if (membershipStatus === 'Non-SPS' && utrNumber.length !== 12) {
       return 'UTR number must be exactly 12 characters';
     }
@@ -127,6 +131,15 @@ const RegistrationSectionIV: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (registrationsClosed) {
+      setSubmitStatus({ 
+        type: 'error', 
+        message: 'Registration is now closed as we have reached the maximum number of participants.' 
+      });
+      setIsPopupOpen(true);
+      return;
+    }
+
     const validationError = getValidationError();
     if (validationError) {
       setSubmitStatus({ 
@@ -140,20 +153,33 @@ const RegistrationSectionIV: React.FC = () => {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    const data = {
-      name,
-      email,
-      phone_number: phone,
-      semester: parseInt(semester, 10),
-      branch,
-      college_name: collegeName,
-      membership_type: membershipStatus,
-      membership_id: membershipStatus === 'SPS' ? membershipId : null,
-      utr_number: membershipStatus === 'Non-SPS' ? utrNumber : null,
-    };
-
     try {
-      const { error } = await supabaseClient.from('visit_registrations').insert([data]);
+      const { count } = await supabaseClient
+        .from('visit_registrations')
+        .select('*', { count: 'exact' });
+
+      if (count && count >= 15) {
+        setRegistrationsClosed(true);
+        setSubmitStatus({
+          type: 'error',
+          message: 'Registration is now closed as we have reached the maximum number of participants.'
+        });
+        setIsPopupOpen(true);
+        return;
+      }
+
+      const { error } = await supabaseClient.from('visit_registrations').insert([{
+        name,
+        email,
+        phone_number: phone,
+        semester: parseInt(semester, 10),
+        branch,
+        college_name: collegeName,
+        membership_type: membershipStatus,
+        membership_id: membershipStatus === 'SPS' ? membershipId : null,
+        utr_number: membershipStatus === 'Non-SPS' ? utrNumber : null,
+      }]);
+
       if (error) throw error;
       
       setSubmitStatus({ 
@@ -162,7 +188,6 @@ const RegistrationSectionIV: React.FC = () => {
       });
       setIsPopupOpen(true);
 
-      // Reset form
       setName('');
       setEmail('');
       setPhone('');
@@ -173,6 +198,8 @@ const RegistrationSectionIV: React.FC = () => {
       setMembershipId('');
       setUtrNumber('');
       setTermsAccepted(false);
+
+      await checkRegistrationCount();
     } catch (error) {
       console.error('Submission error:', error);
       setSubmitStatus({ 
@@ -197,12 +224,16 @@ const RegistrationSectionIV: React.FC = () => {
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Join the industrial visit and explore new opportunities.
+            {registrationsClosed && (
+              <span className="block mt-4 text-red-500">
+                ⚠️ Registration is currently closed as we have reached the maximum number of participants.
+              </span>
+            )}
           </p>
         </div>
 
         <div className="max-w-4xl mx-auto">
           <form onSubmit={handleSubmit} className="space-y-8">
-            {/* Personal Information Section */}
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
               <h3 className="text-xl font-semibold text-white mb-4">Personal Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -248,7 +279,6 @@ const RegistrationSectionIV: React.FC = () => {
               </div>
             </div>
 
-            {/* Academic Details Section */}
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
               <h3 className="text-xl font-semibold text-white mb-4">Academic Details</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -291,11 +321,9 @@ const RegistrationSectionIV: React.FC = () => {
               </div>
             </div>
 
-            {/* IEEE SPS Membership Section */}
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
               <h3 className="text-xl font-semibold text-white mb-4">IEEE SPS Membership</h3>
               <div className="space-y-6">
-                {/* Dropdown */}
                 <div className="relative">
                   <select
                     value={membershipStatus}
@@ -314,7 +342,6 @@ const RegistrationSectionIV: React.FC = () => {
                   </select>
                 </div>
 
-                {/* Conditional input */}
                 {membershipStatus === 'SPS' && (
                   <div className="relative">
                     <input
@@ -337,7 +364,6 @@ const RegistrationSectionIV: React.FC = () => {
                   </div>
                 )}
 
-                {/* Fee box */}
                 <div className="p-4 bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 rounded-xl border border-[#78BE20]/30">
                   <p className="text-lg font-semibold text-white">
                     Registration Fee: ₹{getFee()}
@@ -351,7 +377,6 @@ const RegistrationSectionIV: React.FC = () => {
               </div>
             </div>
 
-            {/* Payment Section - Only shown for Non-SPS members */}
             {membershipStatus === 'Non-SPS' && (
               <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
                 <h3 className="text-xl font-semibold text-white mb-4">Payment Details</h3>
@@ -386,7 +411,6 @@ const RegistrationSectionIV: React.FC = () => {
               </div>
             )}
 
-            {/* Terms and Conditions Checkbox */}
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
               <div className="flex items-start space-x-3">
                 <input
@@ -411,20 +435,18 @@ const RegistrationSectionIV: React.FC = () => {
               </div>
             </div>
 
-            {/* Submit Button */}
             <div className="flex justify-center">
               <button
                 type="submit"
-                disabled={isSubmitting || !validateForm()}
+                disabled={isSubmitting || !validateForm() || registrationsClosed}
                 className={`px-8 py-3 bg-gradient-to-r from-[#004B87] to-[#78BE20] text-white rounded-full hover:from-[#003a69] hover:to-[#62991a] transition-all shadow-lg hover:shadow-[#004B87]/20 transform hover:scale-105 ${
-                  isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                  (isSubmitting || registrationsClosed) ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
               >
-                {isSubmitting ? 'Submitting...' : 'Register Now'}
+                {isSubmitting ? 'Submitting...' : registrationsClosed ? 'Registration Closed' : 'Register Now'}
               </button>
             </div>
 
-            {/* Submission Status */}
             {submitStatus && (
               <div
                 className={`p-4 rounded-xl ${
