@@ -13,8 +13,8 @@ const RegistrationSection: React.FC = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [phoneError, setPhoneError] = useState('');
-  const [memberCount, setMemberCount] = useState(0);
-  const [members, setMembers] = useState<TeamMember[]>([]);
+  const [memberCount, setMemberCount] = useState(2);
+  const [members, setMembers] = useState<TeamMember[]>([{ name: '' }, { name: '' }]);
   const [membershipStatus, setMembershipStatus] = useState('Non-IEEE');
   const [membershipId, setMembershipId] = useState('');
   const [membershipIdError, setMembershipIdError] = useState('');
@@ -50,7 +50,8 @@ const RegistrationSection: React.FC = () => {
   };
 
   const handleMemberCountChange = (count: number) => {
-    const validCount = Math.min(Math.max(0, count), 3);
+    // Enforce minimum of 2 additional members (3 total with captain)
+    const validCount = Math.min(Math.max(2, count), 3);
     setMemberCount(validCount);
     if (validCount > members.length) {
       setMembers([...members, ...Array(validCount - members.length).fill({ name: '' })]);
@@ -96,6 +97,7 @@ const RegistrationSection: React.FC = () => {
       branch.trim() !== '' &&
       collegeName.trim() !== '' &&
       utrNumber.length === 12 &&
+      members.length >= 2 && // Ensure at least 2 additional members
       members.every(member => member.name.trim() !== '') &&
       (membershipStatus === 'Non-IEEE' || (membershipId.trim() !== '' && membershipId.length <= 9)) &&
       termsAccepted
@@ -151,8 +153,8 @@ const RegistrationSection: React.FC = () => {
       setEmail('');
       setPhone('');
       setPhoneError('');
-      setMemberCount(0);
-      setMembers([]);
+      setMemberCount(2);
+      setMembers([{ name: '' }, { name: '' }]);
       setMembershipStatus('Non-IEEE');
       setMembershipId('');
       setMembershipIdError('');
@@ -192,7 +194,6 @@ const RegistrationSection: React.FC = () => {
 
         <div className="max-w-4xl mx-auto">
           <form onSubmit={handleSubmit} className="space-y-8">
-            {/* Team Information Section */}
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
               <h3 className="text-xl font-semibold text-white mb-4">Team Information</h3>
               <div className="relative">
@@ -208,7 +209,6 @@ const RegistrationSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Captain Information Section */}
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
               <h3 className="text-xl font-semibold text-white mb-4">Team Captain Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -287,14 +287,13 @@ const RegistrationSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Team Members Section */}
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
-              <h3 className="text-xl font-semibold text-white mb-4">Team Members (up to 4 including captain)</h3>
+              <h3 className="text-xl font-semibold text-white mb-4">Team Members (3-4 including captain)</h3>
               <div className="space-y-6">
                 <div>
                   <input
                     type="number"
-                    min="0"
+                    min="2"
                     max="3"
                     value={memberCount}
                     onChange={(e) => handleMemberCountChange(parseInt(e.target.value))}
@@ -304,31 +303,25 @@ const RegistrationSection: React.FC = () => {
                   <p className="text-gray-400 text-xs mt-1">Total team size: {memberCount + 1} (including captain)</p>
                 </div>
                 <div className="space-y-4">
-                  {members.length > 0 ? (
-                    members.map((member, index) => (
-                      <div key={index} className="relative">
-                        <input
-                          type="text"
-                          value={member.name}
-                          onChange={(e) => handleMemberNameChange(index, e.target.value)}
-                          required
-                          className="w-full px-4 py-2 bg-slate-900/50 border border-[#78BE20]/30 rounded-lg focus:ring-2 focus:ring-[#78BE20] focus:border-transparent text-gray-300"
-                          placeholder={`Enter member ${index + 1} name`}
-                        />
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-gray-400">No additional team members. Add members by increasing the count above.</p>
-                  )}
+                  {members.map((member, index) => (
+                    <div key={index} className="relative">
+                      <input
+                        type="text"
+                        value={member.name}
+                        onChange={(e) => handleMemberNameChange(index, e.target.value)}
+                        required
+                        className="w-full px-4 py-2 bg-slate-900/50 border border-[#78BE20]/30 rounded-lg focus:ring-2 focus:ring-[#78BE20] focus:border-transparent text-gray-300"
+                        placeholder={`Enter member ${index + 1} name`}
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
 
-            {/* IEEE Membership Section */}
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
               <h3 className="text-xl font-semibold text-white mb-4">IEEE Membership</h3>
               <div className="space-y-6">
-                {/* Dropdown */}
                 <div className="relative">
                   <select
                     value={membershipStatus}
@@ -348,7 +341,6 @@ const RegistrationSection: React.FC = () => {
                   </select>
                 </div>
 
-                {/* Conditional input */}
                 {membershipStatus !== 'Non-IEEE' && (
                   <div className="relative">
                     <input
@@ -371,7 +363,6 @@ const RegistrationSection: React.FC = () => {
                   </div>
                 )}
 
-                {/* Fee box */}
                 <div className="p-4 bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 rounded-xl border border-[#78BE20]/30">
                   <p className="text-lg font-semibold text-white">
                     Registration Fee: ₹{getFee()}
@@ -383,7 +374,6 @@ const RegistrationSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Payment Section */}
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
               <h3 className="text-xl font-semibold text-white mb-4">Payment Details</h3>
               <div className="space-y-6">
@@ -417,7 +407,6 @@ const RegistrationSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Terms and Conditions Checkbox */}
             <div className="bg-gradient-to-br from-slate-800/80 to-[#004B87]/20 backdrop-blur-sm rounded-xl p-6 border border-[#78BE20]/30 shadow-xl">
               <div className="flex items-start space-x-3">
                 <input
@@ -442,7 +431,6 @@ const RegistrationSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Submission Status */}
             {submitStatus && (
               <div
                 className={`p-4 rounded-xl ${
@@ -457,7 +445,6 @@ const RegistrationSection: React.FC = () => {
               </div>
             )}
 
-            {/* Submit Button */}
             <div className="flex justify-center">
               <button
                 type="submit"
